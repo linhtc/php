@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsModelCustomer" table="gcs_model_customer">
+    <indexes>
+      <index name="user_name" columns="customer_id"/>
+      <index name="updatedby" columns="updatedby"/>
+      <index name="createdby" columns="createdby"/>
+      <index name="model_id" columns="model_id"/>
+      <index name="stationtype_id" columns="stationtype_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tier" type="integer" column="tier" nullable="true"/>
+    <field name="price" type="float" column="price" precision="10" scale="0" nullable="true"/>
+    <field name="createddate" type="datetime" column="createddate" nullable="true"/>
+    <field name="updateddate" type="datetime" column="updateddate" nullable="true"/>
+    <field name="delIf" type="boolean" column="del_if" nullable="true"/>
+    <many-to-one field="stationtype" target-entity="GcsStationType">
+      <join-columns>
+        <join-column name="stationtype_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="model" target-entity="GcsModel">
+      <join-columns>
+        <join-column name="model_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="createdby" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="createdby" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="updatedby" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="updatedby" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="customer" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="customer_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

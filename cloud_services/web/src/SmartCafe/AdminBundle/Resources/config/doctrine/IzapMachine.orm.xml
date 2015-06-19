@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\IzapMachine" table="izap_machine">
+    <indexes>
+      <index name="created_by" columns="created_by"/>
+      <index name="updated_by" columns="updated_by"/>
+      <index name="user_id" columns="user_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="machine_sn" columns="machine_sn"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="machineSn" type="string" column="machine_sn" length="25" nullable="false"/>
+    <field name="machineType" type="string" column="machine_type" length="255" nullable="false"/>
+    <field name="machineName" type="string" column="machine_name" length="100" nullable="true"/>
+    <field name="syncModel" type="integer" column="sync_model" nullable="true"/>
+    <field name="syncCredit" type="integer" column="sync_credit" nullable="true"/>
+    <field name="swVersion" type="string" column="sw_version" length="25" nullable="true"/>
+    <field name="fwVersion" type="string" column="fw_version" length="25" nullable="true"/>
+    <field name="onlineVersion" type="string" column="online_version" length="25" nullable="true"/>
+    <field name="webVersion" type="string" column="web_version" length="25" nullable="true"/>
+    <field name="appVersion" type="string" column="app_version" length="25" nullable="true"/>
+    <field name="delif" type="integer" column="delif" nullable="true"/>
+    <field name="availableCredit" type="integer" column="available_credit" nullable="true"/>
+    <field name="location" type="string" column="location" length="25" nullable="true"/>
+    <field name="currentSwVersion" type="string" column="current_sw_version" length="25" nullable="true"/>
+    <field name="currentFwVersion" type="string" column="current_fw_version" length="25" nullable="true"/>
+    <field name="currentWebVersion" type="string" column="current_web_version" length="25" nullable="true"/>
+    <field name="currentAppVersion" type="string" column="current_app_version" length="25" nullable="true"/>
+    <field name="onlineStatus" type="integer" column="online_status" nullable="true"/>
+    <field name="lastLogin" type="datetime" column="last_login" nullable="true"/>
+    <field name="syncConfig" type="integer" column="sync_config" nullable="true"/>
+    <field name="syncFunction" type="integer" column="sync_function" nullable="true"/>
+    <field name="syncFunctionModel" type="integer" column="sync_function_model" nullable="true"/>
+    <field name="createdDate" type="datetime" column="created_date" nullable="true"/>
+    <field name="updatedDate" type="datetime" column="updated_date" nullable="true"/>
+    <field name="appApk" type="string" column="app_apk" length="255" nullable="true"/>
+    <field name="demo" type="integer" column="demo" nullable="true"/>
+    <field name="fwIosVersion" type="string" column="fw_ios_version" length="255" nullable="true"/>
+    <field name="currentFwIosVersion" type="string" column="current_fw_ios_version" length="255" nullable="true"/>
+    <many-to-one field="updatedBy" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="updated_by" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="createdBy" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="created_by" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="user" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

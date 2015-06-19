@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\SellphoneCollectionHub" table="sellphone_collection_hub">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="collectionName" type="string" column="collection_name" length="50" nullable="true"/>
+    <field name="collectionAddress" type="string" column="collection_address" length="200" nullable="true"/>
+    <field name="collectionCity" type="string" column="collection_city" length="255" nullable="true"/>
+    <field name="collectionZipcode" type="string" column="collection_zipcode" length="255" nullable="true"/>
+    <field name="collectionPhone" type="string" column="collection_phone" length="255" nullable="true"/>
+    <field name="collectionFax" type="string" column="collection_fax" length="255" nullable="true"/>
+  </entity>
+</doctrine-mapping>

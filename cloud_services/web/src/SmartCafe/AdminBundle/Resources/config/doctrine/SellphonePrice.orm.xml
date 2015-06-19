@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\SellphonePrice" table="sellphone_price">
+    <indexes>
+      <index name="cate_id" columns="cate_id"/>
+      <index name="capacity_id" columns="capacity_id"/>
+      <index name="carrier_id" columns="carrier_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="level1" type="float" column="level1" precision="20" scale="2" nullable="true"/>
+    <field name="level2" type="float" column="level2" precision="20" scale="2" nullable="true"/>
+    <field name="level3" type="float" column="level3" precision="20" scale="2" nullable="true"/>
+    <many-to-one field="carrier" target-entity="SellphoneCarrier">
+      <join-columns>
+        <join-column name="carrier_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="capacity" target-entity="SellphoneCapacity">
+      <join-columns>
+        <join-column name="capacity_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cate" target-entity="SellphoneCategories">
+      <join-columns>
+        <join-column name="cate_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

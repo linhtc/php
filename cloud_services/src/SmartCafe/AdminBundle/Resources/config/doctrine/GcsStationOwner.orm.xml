@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsStationOwner" table="gcs_station_owner">
+    <indexes>
+      <index name="IDX_743DF3FBD21ED102" columns="admin_create"/>
+      <index name="IDX_743DF3FBC5ED0481" columns="admin_update"/>
+      <index name="IDX_743DF3FB24A232CF" columns="user_name"/>
+      <index name="IDX_743DF3FBF1811DBE" columns="stationid"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ownerDatetime" type="datetime" column="owner_datetime" nullable="false"/>
+    <field name="retailNumber" type="integer" column="retail_number" nullable="true"/>
+    <field name="dateCreate" type="datetime" column="date_create" nullable="true"/>
+    <field name="dateUpdate" type="datetime" column="date_update" nullable="true"/>
+    <field name="ownerStatus" type="integer" column="owner_status" nullable="true"/>
+    <many-to-one field="stationid" target-entity="GcsStation">
+      <join-columns>
+        <join-column name="stationid" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="adminCreate" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="admin_create" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="adminUpdate" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="admin_update" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="userName" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="user_name" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

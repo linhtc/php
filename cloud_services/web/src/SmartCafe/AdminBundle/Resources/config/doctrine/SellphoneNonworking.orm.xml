@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\SellphoneNonworking" table="sellphone_nonworking">
+    <indexes>
+      <index name="IDX_592EEB8FD614C7E7" columns="price_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="title" type="string" column="title" length="255" nullable="true"/>
+    <field name="customerName" type="string" column="customer_name" length="255" nullable="true"/>
+    <field name="email" type="string" column="email" length="255" nullable="true"/>
+    <field name="phone" type="string" column="phone" length="255" nullable="true"/>
+    <field name="address" type="string" column="address" length="255" nullable="true"/>
+    <field name="comment" type="string" column="comment" length="255" nullable="true"/>
+    <field name="productLevel" type="integer" column="product_level" nullable="true"/>
+    <field name="collectionHub" type="integer" column="collection_hub" nullable="true"/>
+    <many-to-one field="price" target-entity="SellphonePrice">
+      <join-columns>
+        <join-column name="price_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

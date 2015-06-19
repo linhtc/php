@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsSiteRouting" table="gcs_site_routing">
+    <indexes>
+      <index name="FK_User" columns="user_id"/>
+      <index name="FK_User_create" columns="user_create"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="siteType" type="string" column="site_type" length="25" nullable="true"/>
+    <field name="siteName" type="string" column="site_name" length="100" nullable="true"/>
+    <field name="url" type="string" column="url" length="255" nullable="true"/>
+    <field name="using" type="boolean" column="using" nullable="true"/>
+    <field name="dateCreate" type="datetime" column="date_create" nullable="true"/>
+    <field name="siteAccount" type="string" column="site_account" length="100" nullable="true"/>
+    <field name="sitePassword" type="string" column="site_password" length="100" nullable="true"/>
+    <field name="delIf" type="boolean" column="del_if" nullable="true"/>
+    <many-to-one field="userCreate" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="user_create" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="user" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

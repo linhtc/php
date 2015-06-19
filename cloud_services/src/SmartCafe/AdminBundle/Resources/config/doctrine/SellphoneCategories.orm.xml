@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\SellphoneCategories" table="sellphone_categories">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="cateName" type="string" column="cate_name" length="50" nullable="false"/>
+    <field name="description" type="string" column="description" length="150" nullable="true"/>
+    <field name="parentId" type="integer" column="parent_id" nullable="false"/>
+    <field name="level" type="integer" column="level" nullable="false"/>
+    <field name="status" type="boolean" column="status" nullable="false"/>
+    <field name="img" type="string" column="img" length="255" nullable="true"/>
+    <field name="width" type="integer" column="width" nullable="true"/>
+    <field name="height" type="integer" column="height" nullable="true"/>
+    <field name="isnonworking" type="integer" column="isnonworking" nullable="true"/>
+    <many-to-many field="plat" target-entity="SellphonePlatform" inversed-by="cate">
+      <join-table name="sellphone_categories_platform">
+        <join-columns>
+          <join-column name="cate_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="plat_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

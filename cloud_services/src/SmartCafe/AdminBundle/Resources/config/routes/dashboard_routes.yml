@@ -1,0 +1,4 @@
+#admin home page
+sc_admin_dashboard:
+    pattern:  /dashboard.html
+    defaults: { _controller: SmartCafeAdminBundle:Dashboard:view }

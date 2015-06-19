@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsStation" table="gcs_station">
+    <indexes>
+      <index name="IDX_6FC5B4912FEA9858" columns="admin_assign"/>
+      <index name="IDX_6FC5B491D21ED102" columns="admin_create"/>
+      <index name="IDX_6FC5B491C5ED0481" columns="admin_update"/>
+      <index name="IDX_6FC5B49162ED7014" columns="station_type"/>
+      <index name="IDX_6FC5B4915373C966" columns="country"/>
+      <index name="location_id" columns="location_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="station_serial" columns="station_serial"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="stationSerial" type="string" column="station_serial" length="100" nullable="false"/>
+    <field name="stationStatus" type="integer" column="station_status" nullable="true"/>
+    <field name="stationVisible" type="integer" column="station_visible" nullable="true"/>
+    <field name="stationOnline" type="integer" column="station_online" nullable="true"/>
+    <field name="lastLogin" type="datetime" column="last_login" nullable="true"/>
+    <field name="notSyncLog" type="integer" column="not_sync_log" nullable="true"/>
+    <field name="delIf" type="integer" column="del_if" nullable="true"/>
+    <field name="stationName" type="string" column="station_name" length="255" nullable="true"/>
+    <field name="stationNotes" type="text" column="station_notes" nullable="true"/>
+    <field name="softwareVersion" type="string" column="software_version" length="100" nullable="true"/>
+    <field name="softwareUsing" type="string" column="software_using" length="100" nullable="true"/>
+    <field name="firmwareVersion" type="string" column="firmware_version" length="100" nullable="true"/>
+    <field name="firmwareUsing" type="string" column="firmware_using" length="100" nullable="true"/>
+    <field name="registeredUnit" type="integer" column="registered_unit" nullable="true"/>
+    <field name="tempRegisteredUnit" type="integer" column="temp_registered_unit" nullable="true"/>
+    <field name="erasableUnit" type="integer" column="erasable_unit" nullable="true"/>
+    <field name="erasedUnit" type="integer" column="erased_unit" nullable="true"/>
+    <field name="eraseFree" type="integer" column="erase_free" nullable="true"/>
+    <field name="dateCreate" type="datetime" column="date_create" nullable="true"/>
+    <field name="dateUpdate" type="datetime" column="date_update" nullable="true"/>
+    <field name="sid" type="string" column="sid" length="100" nullable="true"/>
+    <field name="sendMail" type="integer" column="send_mail" nullable="true"/>
+    <field name="reorderCredit" type="integer" column="reorder_credit" nullable="true"/>
+    <field name="reorderLevel" type="integer" column="reorder_level" nullable="true"/>
+    <field name="reorderAmount" type="integer" column="reorder_amount" nullable="true"/>
+    <field name="reorderSendmail" type="integer" column="reorder_sendmail" nullable="true"/>
+    <field name="reorderCustmail" type="text" column="reorder_custmail" nullable="true"/>
+    <field name="reorderSalemail" type="text" column="reorder_salemail" nullable="true"/>
+    <field name="dateAssign" type="datetime" column="date_assign" nullable="true"/>
+    <field name="monthReport" type="integer" column="month_report" nullable="true"/>
+    <field name="syncBattery" type="integer" column="sync_battery" nullable="true"/>
+    <field name="siteName" type="string" column="site_name" length="255" nullable="true"/>
+    <field name="syncModel" type="integer" column="sync_model" nullable="true"/>
+    <many-to-one field="stationType" target-entity="GcsStationType">
+      <join-columns>
+        <join-column name="station_type" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="country" target-entity="GcsCountry">
+      <join-columns>
+        <join-column name="country" referenced-column-name="country_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="adminUpdate" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="admin_update" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="adminCreate" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="admin_create" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="adminAssign" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="admin_assign" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="location" target-entity="GcsLocation">
+      <join-columns>
+        <join-column name="location_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

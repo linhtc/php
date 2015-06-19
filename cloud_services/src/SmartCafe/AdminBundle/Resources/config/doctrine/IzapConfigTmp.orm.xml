@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\IzapConfigTmp" table="izap_config_tmp">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="riskfactor" type="float" column="riskfactor" precision="10" scale="0" nullable="true"/>
+    <field name="gdt" type="float" column="gdt" precision="10" scale="0" nullable="true"/>
+    <field name="currency" type="float" column="currency" precision="10" scale="0" nullable="true"/>
+    <field name="charity" type="float" column="charity" precision="10" scale="0" nullable="true"/>
+    <field name="bonus" type="float" column="bonus" precision="10" scale="0" nullable="true"/>
+    <field name="rebate" type="float" column="rebate" precision="10" scale="0" nullable="true"/>
+    <field name="markdown" type="float" column="markdown" precision="10" scale="0" nullable="true"/>
+    <field name="labourcostlevel1" type="float" column="labourcostlevel1" precision="10" scale="0" nullable="true"/>
+    <field name="labourcostlevel2" type="float" column="labourcostlevel2" precision="10" scale="0" nullable="true"/>
+    <field name="labourcostlevel3" type="float" column="labourcostlevel3" precision="10" scale="0" nullable="true"/>
+    <field name="labourcostlevel4" type="float" column="labourcostlevel4" precision="10" scale="0" nullable="true"/>
+    <field name="logisticcostphone" type="float" column="logisticcostphone" precision="10" scale="0" nullable="true"/>
+    <field name="logisticcosttablet" type="float" column="logisticcosttablet" precision="10" scale="0" nullable="true"/>
+    <field name="defaultdiscountapple" type="float" column="defaultdiscountapple" precision="10" scale="0" nullable="true"/>
+    <field name="likenewdiscountapple" type="float" column="likenewdiscountapple" precision="10" scale="0" nullable="true"/>
+    <field name="useddiscountapple" type="float" column="useddiscountapple" precision="10" scale="0" nullable="true"/>
+    <field name="damagediscountapple" type="float" column="damagediscountapple" precision="10" scale="0" nullable="true"/>
+    <field name="scrapdiscountapple" type="float" column="scrapdiscountapple" precision="10" scale="0" nullable="true"/>
+    <field name="defaultdiscountsamsung" type="float" column="defaultdiscountsamsung" precision="10" scale="0" nullable="true"/>
+    <field name="likenewdiscountsamsung" type="float" column="likenewdiscountsamsung" precision="10" scale="0" nullable="true"/>
+    <field name="useddiscountsamsung" type="float" column="useddiscountsamsung" precision="10" scale="0" nullable="true"/>
+    <field name="damagediscountsamsung" type="float" column="damagediscountsamsung" precision="10" scale="0" nullable="true"/>
+    <field name="scrapdiscountsamsung" type="float" column="scrapdiscountsamsung" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel1phoneapple" type="float" column="repairtimel1phoneapple" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel2phoneapple" type="float" column="repairtimel2phoneapple" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel3phoneapple" type="float" column="repairtimel3phoneapple" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel4phoneapple" type="float" column="repairtimel4phoneapple" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel1ipadapple" type="float" column="repairtimel1ipadapple" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel2ipadapple" type="float" column="repairtimel2ipadapple" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel3ipadapple" type="float" column="repairtimel3ipadapple" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel4ipadapple" type="float" column="repairtimel4ipadapple" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel1phonesamsung" type="float" column="repairtimel1phonesamsung" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel2phonesamsung" type="float" column="repairtimel2phonesamsung" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel3phonesamsung" type="float" column="repairtimel3phonesamsung" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel4phonesamsung" type="float" column="repairtimel4phonesamsung" precision="10" scale="0" nullable="true"/>
+    <field name="transfering" type="float" column="transfering" precision="10" scale="0" nullable="true"/>
+    <field name="deleting" type="float" column="deleting" precision="10" scale="0" nullable="true"/>
+    <field name="collecting" type="float" column="collecting" precision="10" scale="0" nullable="true"/>
+    <field name="testing" type="float" column="testing" precision="10" scale="0" nullable="true"/>
+    <field name="defaultdiscount" type="float" column="defaultdiscount" precision="10" scale="0" nullable="true"/>
+    <field name="likenewdiscount" type="float" column="likenewdiscount" precision="10" scale="0" nullable="true"/>
+    <field name="useddiscount" type="float" column="useddiscount" precision="10" scale="0" nullable="true"/>
+    <field name="damagediscount" type="float" column="damagediscount" precision="10" scale="0" nullable="true"/>
+    <field name="scrapdiscount" type="float" column="scrapdiscount" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel1phone" type="float" column="repairtimel1phone" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel2phone" type="float" column="repairtimel2phone" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel3phone" type="float" column="repairtimel3phone" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel4phone" type="float" column="repairtimel4phone" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel1ipadtablet" type="float" column="repairtimel1ipadtablet" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel2ipadtablet" type="float" column="repairtimel2ipadtablet" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel3ipadtablet" type="float" column="repairtimel3ipadtablet" precision="10" scale="0" nullable="true"/>
+    <field name="repairtimel4ipadtablet" type="float" column="repairtimel4ipadtablet" precision="10" scale="0" nullable="true"/>
+    <field name="brandId" type="integer" column="brand_id" nullable="true"/>
+    <field name="userId" type="integer" column="user_id" nullable="true"/>
+  </entity>
+</doctrine-mapping>

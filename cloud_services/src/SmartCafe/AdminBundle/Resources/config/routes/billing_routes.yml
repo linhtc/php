@@ -1,0 +1,18 @@
+gcs_admin_billing:
+    pattern:  /
+    defaults: { _controller: GcsAdminBundle:Billing:view }
+gcs_admin_billing_getAlls:
+    pattern:  /getList
+    defaults: { _controller: GcsAdminBundle:Billing:getList }
+gcs_admin_billing_setSession:
+    pattern:  /setSession
+    defaults: { _controller: GcsAdminBundle:Billing:setSession }
+gcs_admin_billing_export:
+    pattern:  /export
+    defaults: { _controller: GcsAdminBundle:Billing:export }
+gcs_admin_billing_get_shift:
+    pattern:  /getShift
+    defaults: { _controller: GcsAdminBundle:Billing:getShiftFromLocation }
+gcs_admin_billing_route_export:
+    pattern:  /exportbilling
+    defaults: { _controller: GcsAdminBundle:Billing:export }

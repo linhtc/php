@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsMenu" table="gcs_menu">
+    <indexes>
+      <index name="IDX_6EE6E24979F9948F" columns="menuparentid"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="parentName" type="string" column="parent_name" length="255" nullable="true"/>
+    <field name="controller" type="string" column="controller" length="256" nullable="true"/>
+    <field name="controllerName" type="string" column="controller_name" length="256" nullable="true"/>
+    <field name="route" type="string" column="route" length="255" nullable="true"/>
+    <field name="routeName" type="string" column="route_name" length="255" nullable="true"/>
+    <field name="status" type="integer" column="status" nullable="false"/>
+    <field name="parentIco" type="string" column="parent_ico" length="255" nullable="true"/>
+    <field name="parentid" type="integer" column="parentid" nullable="true"/>
+    <field name="parentStatus" type="integer" column="parent_status" nullable="false"/>
+    <field name="ordering" type="integer" column="ordering" nullable="true"/>
+    <field name="setting" type="integer" column="setting" nullable="true"/>
+    <many-to-one field="menuparentid" target-entity="GcsMenuParent">
+      <join-columns>
+        <join-column name="menuparentid" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="role" target-entity="GcsRole" inversed-by="menu">
+      <join-table name="menu_role">
+        <join-columns>
+          <join-column name="menu_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="role_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

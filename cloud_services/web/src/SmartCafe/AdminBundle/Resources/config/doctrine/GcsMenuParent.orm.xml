@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsMenuParent" table="gcs_menu_parent">
+    <indexes>
+      <index name="ordering" columns="ordering"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="255" nullable="true"/>
+    <field name="ico" type="string" column="ico" length="255" nullable="true"/>
+    <field name="delif" type="integer" column="delif" nullable="true"/>
+    <field name="ordering" type="integer" column="ordering" nullable="true"/>
+  </entity>
+</doctrine-mapping>

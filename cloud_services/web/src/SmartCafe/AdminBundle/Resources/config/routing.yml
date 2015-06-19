@@ -1,0 +1,10 @@
+#admin home page
+sc_admin_dashboard:
+    resource: "@SmartCafeAdminBundle/Resources/config/routes/dashboard_routes.yml"
+    prefix:   /
+sc_admin_customer:
+    resource: "@SmartCafeAdminBundle/Resources/config/routes/customer_routes.yml"
+    prefix:   /customer
+sc_admin_menu:
+    resource: "@SmartCafeAdminBundle/Resources/config/routes/menu_routes.yml"
+    prefix:   /menu

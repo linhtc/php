@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\SellphoneCategoriesFunction" table="sellphone_categories_function">
+    <indexes>
+      <index name="cate_id" columns="cate_id"/>
+      <index name="function_id" columns="function_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="partcostRmb" type="float" column="partcost_rmb" precision="10" scale="0" nullable="true"/>
+    <field name="repairTime" type="integer" column="repair_time" nullable="true"/>
+    <field name="labourRate" type="float" column="labour_rate" precision="10" scale="0" nullable="true"/>
+    <field name="userId" type="integer" column="user_id" nullable="true"/>
+    <field name="sync" type="integer" column="sync" nullable="true"/>
+    <field name="delif" type="integer" column="delif" nullable="true"/>
+    <many-to-one field="function" target-entity="SellphoneFunctionTest">
+      <join-columns>
+        <join-column name="function_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cate" target-entity="SellphoneCategories">
+      <join-columns>
+        <join-column name="cate_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

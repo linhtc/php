@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsCountry" table="gcs_country">
+    <id name="countryId" type="integer" column="country_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="iso2" type="string" column="iso2" length="2" nullable="true"/>
+    <field name="iso3" type="string" column="iso3" length="3" nullable="true"/>
+    <field name="shortName" type="string" column="short_name" length="80" nullable="false"/>
+    <field name="longName" type="string" column="long_name" length="80" nullable="false"/>
+    <field name="unMember" type="string" column="un_member" length="12" nullable="true"/>
+    <field name="numcode" type="string" column="numcode" length="6" nullable="true"/>
+    <field name="callingCode" type="string" column="calling_code" length="8" nullable="true"/>
+    <field name="cctld" type="string" column="cctld" length="5" nullable="true"/>
+    <field name="izap" type="integer" column="izap" nullable="true"/>
+    <field name="imm" type="integer" column="imm" nullable="true"/>
+  </entity>
+</doctrine-mapping>

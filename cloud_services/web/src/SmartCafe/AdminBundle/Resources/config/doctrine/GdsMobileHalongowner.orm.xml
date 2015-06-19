@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GdsMobileHalongowner" table="gds_mobile_halongowner">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="userName" type="string" column="user_name" length="300" nullable="true"/>
+    <field name="stationSerial" type="string" column="station_serial" length="300" nullable="true"/>
+    <field name="halongSerial" type="string" column="halong_serial" length="300" nullable="true"/>
+    <field name="ownerDatetime" type="datetime" column="owner_datetime" nullable="true"/>
+    <field name="retailNumber" type="integer" column="retail_number" nullable="true"/>
+    <field name="adminCreate" type="string" column="admin_create" length="300" nullable="true"/>
+    <field name="adminUpdate" type="string" column="admin_update" length="300" nullable="true"/>
+    <field name="dateCreate" type="datetime" column="date_create" nullable="true"/>
+    <field name="dateUpdate" type="datetime" column="date_update" nullable="true"/>
+    <field name="ownerStatus" type="integer" column="owner_status" nullable="true"/>
+  </entity>
+</doctrine-mapping>

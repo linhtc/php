@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\IzapCreditmodel" table="izap_creditmodel">
+    <indexes>
+      <index name="IDX_6AEEB4037975B7E7" columns="model_id"/>
+      <index name="IDX_6AEEB403A76ED395" columns="user_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="modelId" type="integer" column="model_id" nullable="true"/>
+    <field name="userId" type="integer" column="user_id" nullable="true"/>
+    <field name="credit" type="integer" column="credit" nullable="true"/>
+    <field name="delif" type="integer" column="delif" nullable="true"/>
+    <field name="sync" type="integer" column="sync" nullable="true"/>
+  </entity>
+</doctrine-mapping>

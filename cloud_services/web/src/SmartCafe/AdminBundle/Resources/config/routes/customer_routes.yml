@@ -1,0 +1,7 @@
+#customer page
+sc_admin_customer:
+    pattern:  /view.html
+    defaults: { _controller: AdminBundle:Customer:view }
+sc_admin_customer_get_list:
+    pattern:  /get-list.html
+    defaults: { _controller: AdminBundle:Customer:getList }

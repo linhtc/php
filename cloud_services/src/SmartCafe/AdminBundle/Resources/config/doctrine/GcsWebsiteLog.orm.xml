@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsWebsiteLog" table="gcs_website_log">
+    <indexes>
+      <index name="requested_by" columns="requested_by"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ipAddress" type="text" column="ip_address" nullable="true"/>
+    <field name="requestedRoute" type="string" column="requested_route" length="255" nullable="false"/>
+    <field name="requestedParams" type="text" column="requested_params" nullable="true"/>
+    <field name="requestedDate" type="datetime" column="requested_date" nullable="true"/>
+    <field name="responsedContent" type="text" column="responsed_content" nullable="true"/>
+    <many-to-one field="requestedBy" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="requested_by" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

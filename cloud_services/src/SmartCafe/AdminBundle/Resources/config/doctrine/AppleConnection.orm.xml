@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\AppleConnection" table="apple_connection">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="serialnumber" type="string" column="serialnumber" length="25" nullable="true"/>
+    <field name="status" type="integer" column="status" nullable="true"/>
+    <field name="datetime" type="datetime" column="datetime" nullable="true"/>
+    <field name="dataresponse" type="text" column="dataresponse" nullable="true"/>
+    <field name="pushedUrl" type="string" column="pushed_url" length="50" nullable="true"/>
+    <field name="ip" type="string" column="ip" length="25" nullable="true"/>
+    <field name="hostname" type="string" column="hostname" length="255" nullable="true"/>
+    <field name="city" type="string" column="city" length="50" nullable="true"/>
+    <field name="region" type="string" column="region" length="50" nullable="true"/>
+    <field name="country" type="string" column="country" length="25" nullable="true"/>
+    <field name="loc" type="string" column="loc" length="50" nullable="true"/>
+    <field name="org" type="string" column="org" length="255" nullable="true"/>
+    <field name="postal" type="string" column="postal" length="20" nullable="true"/>
+  </entity>
+</doctrine-mapping>

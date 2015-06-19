@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsCustomerCreditTracking" table="gcs_customer_credit_tracking">
+    <indexes>
+      <index name="IDX_BB725524DE12AB56" columns="created_by"/>
+      <index name="IDX_BB72552465FBD7E3" columns="customer_credit_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="creditQty" type="float" column="credit_qty" precision="10" scale="0" nullable="true"/>
+    <field name="action" type="string" column="action" length="25" nullable="true"/>
+    <field name="note" type="text" column="note" nullable="false"/>
+    <field name="createdDate" type="datetime" column="created_date" nullable="true"/>
+    <many-to-one field="createdBy" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="created_by" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="customerCredit" target-entity="GcsCustomerCredit">
+      <join-columns>
+        <join-column name="customer_credit_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

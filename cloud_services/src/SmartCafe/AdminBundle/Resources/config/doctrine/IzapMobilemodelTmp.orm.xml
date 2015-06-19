@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\IzapMobilemodelTmp" table="izap_mobilemodel_tmp">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="modelname" type="string" column="modelname" length="255" nullable="true"/>
+    <field name="producttype" type="string" column="producttype" length="255" nullable="true"/>
+    <field name="color" type="string" column="color" length="255" nullable="true"/>
+    <field name="capacity" type="integer" column="capacity" nullable="true"/>
+    <field name="model" type="string" column="model" length="255" nullable="true"/>
+    <field name="model2" type="string" column="model2" length="255" nullable="true"/>
+    <field name="initCredit" type="integer" column="init_credit" nullable="true"/>
+    <field name="initLevel1" type="float" column="init_level1" precision="10" scale="0" nullable="true"/>
+    <field name="initLevel2" type="float" column="init_level2" precision="10" scale="0" nullable="true"/>
+    <field name="initLevel3" type="float" column="init_level3" precision="10" scale="0" nullable="true"/>
+    <field name="delif" type="integer" column="delif" nullable="true"/>
+    <field name="brand" type="integer" column="brand" nullable="true"/>
+  </entity>
+</doctrine-mapping>

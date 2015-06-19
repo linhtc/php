@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\IzapUser" table="izap_user">
+    <indexes>
+      <index name="groupid" columns="groupid"/>
+      <index name="usercreated" columns="usercreated"/>
+      <index name="tagid" columns="tagid"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="username" type="string" column="username" length="100" nullable="true"/>
+    <field name="fullname" type="string" column="fullname" length="50" nullable="true"/>
+    <field name="password" type="string" column="password" length="256" nullable="true"/>
+    <field name="email" type="string" column="email" length="50" nullable="true"/>
+    <field name="groupid" type="integer" column="groupid" nullable="true"/>
+    <field name="datecreated" type="datetime" column="datecreated" nullable="true"/>
+    <field name="usercreated" type="integer" column="usercreated" nullable="true"/>
+    <field name="tagid" type="integer" column="tagid" nullable="true"/>
+    <field name="userstatus" type="boolean" column="userstatus" nullable="true"/>
+    <field name="usertype" type="integer" column="usertype" nullable="true"/>
+    <field name="delif" type="boolean" column="delif" nullable="true"/>
+    <field name="customerid" type="integer" column="customerid" nullable="true"/>
+    <field name="usergroup" type="integer" column="usergroup" nullable="true"/>
+    <field name="country" type="string" column="country" length="255" nullable="true"/>
+  </entity>
+</doctrine-mapping>

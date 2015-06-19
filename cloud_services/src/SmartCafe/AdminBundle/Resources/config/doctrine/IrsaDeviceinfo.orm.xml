@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\IrsaDeviceinfo" table="irsa_deviceinfo">
+    <indexes>
+      <index name="machine_sn" columns="machine_sn"/>
+      <index name="model" columns="model"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="manufacture" type="string" column="manufacture" length="255" nullable="true"/>
+    <field name="os" type="string" column="os" length="255" nullable="true"/>
+    <field name="productType" type="string" column="product_type" length="255" nullable="true"/>
+    <field name="imeiEsn" type="string" column="imei_esn" length="255" nullable="true"/>
+    <field name="serialnumber" type="string" column="serialnumber" length="255" nullable="true"/>
+    <field name="phonenumber" type="string" column="phonenumber" length="255" nullable="true"/>
+    <field name="capacity" type="string" column="capacity" length="255" nullable="true"/>
+    <field name="phoneFw" type="string" column="phone_fw" length="255" nullable="true"/>
+    <field name="driverLicense" type="string" column="driver_license" length="255" nullable="true"/>
+    <field name="udid" type="string" column="UDID" length="255" nullable="true"/>
+    <field name="functionTest" type="text" column="function_test" nullable="true"/>
+    <field name="prodVersion" type="string" column="prod_version" length="255" nullable="true"/>
+    <field name="phoneBattery" type="integer" column="phone_battery" nullable="true"/>
+    <field name="deviceColor" type="string" column="device_color" length="255" nullable="true"/>
+    <field name="carrier" type="string" column="carrier" length="255" nullable="true"/>
+    <field name="basebandVersion" type="string" column="baseband_version" length="255" nullable="true"/>
+    <field name="bluetoothAddress" type="string" column="bluetooth_address" length="255" nullable="true"/>
+    <field name="wifiAddress" type="string" column="wifi_address" length="255" nullable="true"/>
+    <field name="activationState" type="string" column="activation_state" length="255" nullable="true"/>
+    <field name="jailbroken" type="boolean" column="jailbroken" nullable="true"/>
+    <field name="datecreated" type="datetime" column="datecreated" nullable="true"/>
+    <field name="eraseStatus" type="string" column="erase_status" length="255" nullable="true"/>
+    <field name="price" type="integer" column="price" nullable="true"/>
+    <field name="delif" type="boolean" column="delif" nullable="true"/>
+    <field name="username" type="string" column="username" length="100" nullable="true"/>
+    <field name="fullname" type="string" column="fullname" length="255" nullable="true"/>
+    <field name="clientLogId" type="integer" column="client_log_id" nullable="true"/>
+    <field name="signature" type="string" column="signature" length="255" nullable="true"/>
+    <field name="customerName" type="string" column="customer_name" length="255" nullable="true"/>
+    <field name="customerId" type="string" column="customer_id" length="255" nullable="true"/>
+    <field name="customerEmail" type="string" column="customer_email" length="255" nullable="true"/>
+    <field name="customerMobile" type="string" column="customer_mobile" length="255" nullable="true"/>
+    <field name="certificateId" type="string" column="certificate_id" length="255" nullable="true"/>
+    <field name="timeerase" type="string" column="timeerase" length="255" nullable="true"/>
+    <field name="logcode" type="string" column="logcode" length="255" nullable="true"/>
+    <field name="syncStatus" type="integer" column="sync_status" nullable="false"/>
+    <field name="buyStatus" type="integer" column="buy_status" nullable="false"/>
+    <many-to-one field="model" target-entity="IrsaMobilemodel">
+      <join-columns>
+        <join-column name="model" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="machineSn" target-entity="IzapMachine">
+      <join-columns>
+        <join-column name="machine_sn" referenced-column-name="machine_sn"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsLocation" table="gcs_location">
+    <indexes>
+      <index name="country_id" columns="country_id"/>
+      <index name="location_zone" columns="location_zone"/>
+      <index name="owner_by" columns="owner_by"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="locationName" type="string" column="location_name" length="50" nullable="false"/>
+    <field name="createdBy" type="integer" column="created_by" nullable="false"/>
+    <field name="updatedBy" type="integer" column="updated_by" nullable="true"/>
+    <field name="createdDate" type="datetime" column="created_date" nullable="false"/>
+    <field name="updatedDate" type="datetime" column="updated_date" nullable="false"/>
+    <many-to-one field="locationZone" target-entity="GcsZone">
+      <join-columns>
+        <join-column name="location_zone" referenced-column-name="zone_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="country" target-entity="GcsCountry">
+      <join-columns>
+        <join-column name="country_id" referenced-column-name="country_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="ownerBy" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="owner_by" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

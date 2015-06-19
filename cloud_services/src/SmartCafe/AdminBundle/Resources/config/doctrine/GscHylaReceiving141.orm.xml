@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GscHylaReceiving141" table="gsc_hyla_receiving_14_1">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="productname" type="string" column="productname" length="100" nullable="true"/>
+    <field name="model" type="string" column="model" length="30" nullable="true"/>
+    <field name="sn" type="string" column="sn" length="20" nullable="true"/>
+    <field name="capacity" type="float" column="capacity" precision="10" scale="0" nullable="true"/>
+    <field name="color" type="string" column="color" length="30" nullable="true"/>
+    <field name="imei" type="string" column="imei" length="20" nullable="true"/>
+    <field name="carrier" type="string" column="carrier" length="25" nullable="true"/>
+    <field name="wifi" type="string" column="wifi" length="30" nullable="true"/>
+    <field name="ios" type="string" column="ios" length="10" nullable="true"/>
+    <field name="bluetooth" type="string" column="bluetooth" length="30" nullable="true"/>
+    <field name="manufacture" type="string" column="manufacture" length="100" nullable="true"/>
+    <field name="baseband" type="string" column="baseband" length="25" nullable="true"/>
+    <field name="fmi" type="boolean" column="fmi" nullable="true"/>
+    <field name="trackingid" type="string" column="trackingid" length="50" nullable="true"/>
+    <field name="uniqueid" type="bigint" column="uniqueid" nullable="true"/>
+    <field name="stationid" type="string" column="stationid" length="25" nullable="true"/>
+    <field name="elapsed" type="string" column="elapsed" length="30" nullable="true"/>
+    <field name="objJson" type="string" column="obj_json" length="1000" nullable="true"/>
+    <field name="resutCus" type="string" column="resut_cus" length="50" nullable="true"/>
+    <field name="usercreate" type="string" column="usercreate" length="50" nullable="true"/>
+    <field name="datecreate" type="datetime" column="datecreate" nullable="false"/>
+    <field name="protocols" type="string" column="protocols" length="10" nullable="true"/>
+    <field name="isdelete" type="boolean" column="isdelete" nullable="true"/>
+  </entity>
+</doctrine-mapping>

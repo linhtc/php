@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\SellphonePlatform" table="sellphone_platform">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="platformName" type="string" column="platform_name" length="50" nullable="false"/>
+    <field name="platformDescription" type="string" column="platform_description" length="200" nullable="true"/>
+    <field name="imageIntro" type="string" column="image_intro" length="500" nullable="true"/>
+    <field name="status" type="boolean" column="status" nullable="false"/>
+    <field name="iconIntro" type="string" column="icon_intro" length="50" nullable="true"/>
+    <field name="imageWorking" type="string" column="image_working" length="500" nullable="true"/>
+    <field name="imageNonWorking" type="string" column="image_non_working" length="500" nullable="true"/>
+    <many-to-many field="cate" target-entity="SellphoneCategories" mapped-by="plat"/>
+  </entity>
+</doctrine-mapping>

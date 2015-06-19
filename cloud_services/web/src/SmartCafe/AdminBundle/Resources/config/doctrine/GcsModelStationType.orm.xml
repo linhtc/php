@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsModelStationType" table="gcs_model_station_type">
+    <indexes>
+      <index name="created_by" columns="created_by"/>
+      <index name="updated_by" columns="updated_by"/>
+      <index name="station_type" columns="station_type"/>
+      <index name="id" columns="id"/>
+      <index name="IDX_468C90437975B7E7" columns="model_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id"/>
+    <id name="model" association-key="true"/>
+    <id name="stationType" association-key="true"/>
+    <field name="createdDate" type="datetime" column="created_date" nullable="true"/>
+    <field name="updatedDate" type="datetime" column="updated_date" nullable="true"/>
+    <field name="tier" type="integer" column="tier" nullable="true"/>
+    <field name="price" type="float" column="price" precision="10" scale="0" nullable="true"/>
+    <one-to-one field="model" target-entity="GcsModel">
+      <join-columns>
+        <join-column name="model_id" referenced-column-name="id"/>
+      </join-columns>
+    </one-to-one>
+    <one-to-one field="stationType" target-entity="GcsStationType">
+      <join-columns>
+        <join-column name="station_type" referenced-column-name="id"/>
+      </join-columns>
+    </one-to-one>
+    <many-to-one field="createdBy" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="created_by" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="updatedBy" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="updated_by" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
