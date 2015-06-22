@@ -21,7 +21,7 @@ class CustomerController extends Controller
 		$data = array(
 			
         );
-        return $this->render('AdminBundle:Customer:view.html.php', $data);
+        return $this->render('SmartCafeAdminBundle:Customer:view.html.php', $data);
     }
     public function getListAction(){
     	$request = (isset($_POST['request']) ? $_POST['request'] : '');

@@ -13,6 +13,7 @@ $username = '';
 $fullname = '';
 $menuHtml = '';
 $pageTitle = '';
+$themeColor = 'smart_cafe_blue';
 $sessionLogin = $app->getSession()->get('profile');
 if(is_object($sessionLogin)){
 	$username = isset($sessionLogin->username) ? $sessionLogin->username : '';
@@ -20,6 +21,7 @@ if(is_object($sessionLogin)){
 	$menuHtml = isset($sessionLogin->menu) ? $sessionLogin->menu : '';
 	$pageTitle = isset($sessionLogin->pageTitle) ? $sessionLogin->pageTitle : '';
 }
+ //exit;
 ?>
 <!DOCTYPE html>
 <!-- 
@@ -68,6 +70,11 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="/web/theme/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
 <link href="/web/theme/assets/admin/layout/css/themes/smart_cafe_blue.css" rel="stylesheet" type="text/css" id="style_color"/>
 <link href="/web/theme/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+
+<!-- Css for each page -->
+<?php $view['slots']->output('css',false) ?>
+<!-- END PAGE LEVEL SCRIPTS -->
+
 <!-- END THEME STYLES -->
 <!-- <link rel="shortcut icon" href="favicon.ico"/>  -->
 <link rel="icon" type="image/png" href="/web/img/fa-cafe.png" />
@@ -133,7 +140,8 @@ License: You must have a valid license purchased only from themeforest(the above
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				<li class="start active open">
+				<?php echo $menuHtml; ?>
+				<li class="start active open" style="display: none;">
 					<a href="javascript:;">
 					<i class="icon-home"></i>
 					<span class="title">Dashboard</span>
@@ -907,6 +915,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				); 
 		  	?>
 			<!-- END PAGE HEADER-->
+			<?php $view['slots']->output('body') ?>
 		</div>
 	</div>
 	<!-- END CONTENT -->
@@ -1610,6 +1619,9 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="/web/theme/assets/admin/pages/scripts/index.js" type="text/javascript"></script>
 <script src="/web/theme/assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
+<!-- Css for each page -->
+<?php $view['slots']->output('js',false) ?>
+<!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    
    Metronic.init(); // init metronic core componets
@@ -1624,6 +1636,31 @@ jQuery(document).ready(function() {
    //Index.initChat();
    //Index.initMiniCharts();
    //Tasks.initDashboardWidget();
+	
+	//config selected item of menu
+   	var pathname = window.location.pathname;
+  	pathname = pathname.replace(new RegExp('/', 'g'), '_');
+   	pathname = pathname.replace('.', '_');
+   	var level = $('.'+pathname).attr('level');
+   	var obj = $('.'+pathname);
+   	obj.addClass('active');
+  	for(var i = 0; i <= level; i++){
+    	obj = obj.parent();
+    	var lvObj = obj.attr('level');
+    	if(lvObj == 1){
+    		obj.addClass('start active');
+    		var objA = obj.find('a');
+    		objA.append('<span class="selected"></span>');
+        }
+     	var tagName = obj[0].tagName.toLowerCase();
+     	if(tagName == 'ul'){
+       		obj.css('display', 'block');
+     	}
+     	if(tagName == 'li'){
+       		obj.addClass('open');
+     	}
+     	obj.find('span').addClass('open');
+   }
 });
 </script>
 <!-- END JAVASCRIPTS -->

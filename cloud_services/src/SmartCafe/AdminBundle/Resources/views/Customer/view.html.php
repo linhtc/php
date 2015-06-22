@@ -1,4 +1,4 @@
-<?php $view->extend('AdminBundle::admin.layout.html.php') ?>
+<?php $view->extend('SmartCafeAdminBundle::admin.layout.html.php') ?>
 <?php $view['slots']->start('js') ?>
 <script type="text/javascript" src="/web/js/admin/customer.js" ></script>
 <script>
@@ -9,7 +9,7 @@
 <?php $view['slots']->stop() ?>
 <!-- Main Content Here -->
 <?php $view['slots']->start('body') ?>
-<div class="portlet box green">
+<div class="portlet box blue">
 	<div class="portlet-title">
 		<div class="caption">
 			<i class="fa fa-gift"></i>Customer Management
@@ -69,7 +69,7 @@
 	</div>
 </div>
 <!-- BEGIN SAMPLE TABLE PORTLET-->
-<div class="portlet box green">
+<div class="portlet box blue">
 	<div class="portlet-title">
 		<div class="caption">
 			<i class="fa fa-cogs"></i>Customer' s List

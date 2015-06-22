@@ -8,3 +8,6 @@ sc_admin_customer:
 sc_admin_menu:
     resource: "@SmartCafeAdminBundle/Resources/config/routes/menu_routes.yml"
     prefix:   /menu
+sc_admin_order:
+    resource: "@SmartCafeAdminBundle/Resources/config/routes/order_routes.yml"
+    prefix:   /order

@@ -1,4 +1,4 @@
 #customer page
 sc_admin_menu:
-    pattern:  /menu.html
+    pattern:  /view.html
     defaults: { _controller: AdminBundle:Menu:view }

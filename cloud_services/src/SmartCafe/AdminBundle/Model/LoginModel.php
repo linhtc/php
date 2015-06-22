@@ -52,7 +52,8 @@ class LoginModel{
 			$sql = "
 				SELECT 	id, menu_name, parent_id, route, url, uri, icon
 				FROM 	sc_menu
-				WHERE 	deleted = 0;		
+				WHERE 	deleted = 0
+				ORDER BY ordering;		
 			";
 			$menuList = $cn->fetchAll($sql);
 			//config permission and menu
@@ -93,14 +94,7 @@ class LoginModel{
 					}
 				}
 			}
-			$menuHtml = '
-				<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-					<li class="start active ">
-						<a href="'.($this->objCtrl->generateUrl('sc_admin_dashboard')).'">
-						<i class="icon-home"></i>
-						<span class="title">Dashboard</span>
-						</a>
-					</li>	
+			$menuHtml = '	
 			';
 			foreach($menuRoot as $idMenu){
 				if(isset($permissionList->$idMenu->view) || $profile->admin){
@@ -115,7 +109,7 @@ class LoginModel{
 						$menuUrl = 'javascript:;';
 					}
 					$menuHtml .= '
-						<li '.(($runable == $break) ? 'class="last"' : '').' level='.$level.'>
+						<li '.(($runable == $break) ? 'class="last"' : '').' level='.$level.' style="'.((empty($objMenu->url) && !isset($menuMap->$idMenu)) ? 'display:none;' : '').'">
 							<a href="'.$menuUrl.'">
 							<i class="'.$menuIcon.'"></i>
 							<span class="title">'.$menuName.'</span>
@@ -128,9 +122,6 @@ class LoginModel{
 					$menuHtml .= '</li>';
 				}
 			}
-			$menuHtml .= '
-				</ul>
-			';
 			$profile->menu = $menuHtml;
 			$profile->permission = $permissionRole;
 			$session->set('profile', $profile);
@@ -157,11 +148,10 @@ class LoginModel{
 					$menuUrl = 'javascript:;';
 				}
 				$menuHtml .= '
-					<li '.(!empty($menuUrl) ? 'class="'.(str_replace('.', '_', str_replace('/', '_', $menuUrl))) : '').'" level='.$level.'>
+					<li '.(!empty($menuUrl) ? 'class="'.(str_replace('.', '_', str_replace('/', '_', $menuUrl))) : '').'" level='.$level.' style="'.((empty($objMenu->url) && !isset($menuMap->$idMenuChild)) ? 'display:none;' : '').'">
 						<a href="'.$menuUrl.'">
-						<i class="'.$menuIcon.'"></i>'.$menuName.'
-						'.(isset($menuMap->$idMenuChild) ? '<span class="arrow "></span>' : '').'
-						</a>
+						<i class="'.$menuIcon.'"></i>
+								'.$menuName.''.(isset($menuMap->$idMenuChild) ? '<span class="arrow "></span>' : '').'</a>
 				';
 				if(isset($menuMap->$idMenuChild)){
 					$this->getChildMenu($menuMap, $menuMap->$idMenuChild, $menuObj, $menuHtml, $permissionList, $admin, $level);		

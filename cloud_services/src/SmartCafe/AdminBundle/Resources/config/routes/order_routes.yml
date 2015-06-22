@@ -1,0 +1,4 @@
+#customer page
+sc_admin_order:
+    pattern:  /view.html
+    defaults: { _controller: AdminBundle:Menu:view }
