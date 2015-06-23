@@ -13,7 +13,12 @@ use SmartCafe\AdminBundle\Model\BaseModel;
 class PageBreadCrumbController extends Controller
 {
     public function viewAction($routeName){
-    	$data = array();
+		$sessionLogin = $this->get('session')->get('profile');
+		$uriServer = $_SERVER['REQUEST_URI'];
+		$uriMap = isset($sessionLogin->uri_map) ? $sessionLogin->uri_map : '';
+		//print_r($uriMap); exit;
+		$breadCrumb = isset($uriMap->$uriServer) ? $uriMap->$uriServer : '';
+    	$data = array('breadCrumb' => $breadCrumb);
         return $this->render('SmartCafeAdminBundle:PageBreadCrumb:view.html.php', $data);
     }
 }
