@@ -48,6 +48,7 @@ class LoginModel{
 			$menuRoot = new \stdClass();
 			$menuObj = new \stdClass();
 			$menuMap = new \stdClass();
+			$uriMap = new \stdClass();
 			//get menu list
 			$sql = "
 				SELECT 	id, menu_name, parent_id, route, url, uri, icon
@@ -67,6 +68,11 @@ class LoginModel{
 				$iconMenu = $item['icon'];
 				if(!isset($menuRoute->$idMenu) && !empty($urlMenu) && !empty($uriMenu)){
 					$menuRoute->$idMenu = $routeMenu.'___'.$uriMenu;
+				}
+				if(!empty($uriMenu)){
+					if(!isset($uriMap->$idMenu)){
+						$uriMap->$idMenu = $uriMenu;
+					}	
 				}
 				if(!isset($menuRoot->$idMenu) && $parentidMenu == 0){
 					$menuRoot->$idMenu = $idMenu;
@@ -94,6 +100,8 @@ class LoginModel{
 					}
 				}
 			}
+			print_r($uriMap); echo '<hr />';
+			print_r($menuMap); exit;
 			$menuHtml = '	
 			';
 			foreach($menuRoot as $idMenu){
