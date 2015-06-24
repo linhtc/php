@@ -161,6 +161,7 @@ Optimize = {
 					buttons: [{ value: "OK"}],
 					success: function (result) {
 						if(data.indexOf('success') >= 0){
+							Optimize.resetFormControl();
 							Optimize.getDataWithAjax(1);
 						}
 					}
@@ -190,6 +191,7 @@ Optimize = {
 					buttons: [{ value: "OK"}],
 					success: function (result) {
 						if(data.indexOf('success') >= 0){
+							Optimize.resetFormControl();
 							Optimize.getDataWithAjax(1);
 						}
 					}

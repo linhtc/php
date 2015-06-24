@@ -456,13 +456,16 @@ class BaseModel extends ContainerAware
 		}
 		$colAppend = isset($config->colAppend) ?$config->colAppend  : '';
 		$tableJoin = isset($config->tableJoin) ?$config->tableJoin  : '';
+		$ordering = isset($config->ordering) ?$config->ordering  : '';
 		$page = isset($config->page) ?$config->page  : 1;
 		$rowPerPage = isset($config->rowPerPage) ? $config->rowPerPage : 10;
 		$start = ($page - 1) * $rowPerPage;
 		
 		$criteriaPattern = array(
 			'customer' => 'in',
+			'customerid' => 'in',
 			'name' => 'like',
+			'site_name' => 'like',
 			'time_change' => 'lte_datetime'
 		);
 		$criteria = '';
@@ -510,6 +513,7 @@ class BaseModel extends ContainerAware
 			SELECT o1.* $colAppend
 			FROM $table o1 $tableJoin
 			WHERE $criteria
+			$ordering
 			$limit;
 		";
 		$cn = $this->_em->getConnection();
@@ -602,7 +606,7 @@ class BaseModel extends ContainerAware
 			}
 			$fields .= ($fields == '' ? "`" : ", `").$field."`";
 			if(!is_numeric($value)){
-				$values .= ($values == '' ? "" : ", '") .$value."'";
+				$values .= ($values == '' ? "'" : ", '") .$value."'";
 				$updateTmp .= ($updateTmp == '' ? " SET $field = " : ", $field = '") .$value."'";
 			} else{
 				$values .= ($values == '' ? "" : ", ").$value;
@@ -664,7 +668,7 @@ class BaseModel extends ContainerAware
 			}
 			$fields .= ($fields == '' ? "`" : ", `").$field."`";
 			if(!is_numeric($value)){
-				$updateTmp .= ($updateTmp == '' ? " SET $field = " : ", $field = '") .$value."'";
+				$updateTmp .= ($updateTmp == '' ? " SET $field = '" : ", $field = '") .$value."'";
 			} else{
 				$updateTmp .= ($updateTmp == '' ? " SET $field = " : ", $field = ") .$value;
 			}
