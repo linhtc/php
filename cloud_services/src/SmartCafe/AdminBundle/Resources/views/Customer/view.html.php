@@ -2,7 +2,7 @@
 <?php $view['slots']->start('js') ?>
 <script type="text/javascript" src="/web/js/admin/customer.js" ></script>
 <script>
-	var getListLink = '<?php echo $view['router']->generate('sc_admin_customer_get_list'); ?>';
+	var getListLink = '<?php echo $view['router']->generate('sc_admin_customer_hidden_get_list'); ?>';
 	var getListPage = 0;
 	Customer.getList(getListLink, getListPage);
 </script>

@@ -48,6 +48,8 @@ class LoginModel{
 			$menuRoot = new \stdClass();
 			$menuObj = new \stdClass();
 			$menuMap = new \stdClass();
+			$uriMap = new \stdClass();
+			$uriMapTmp = new \stdClass();
 			//get menu list
 			$sql = "
 				SELECT 	id, menu_name, parent_id, route, url, uri, icon
@@ -67,6 +69,11 @@ class LoginModel{
 				$iconMenu = $item['icon'];
 				if(!isset($menuRoute->$idMenu) && !empty($urlMenu) && !empty($uriMenu)){
 					$menuRoute->$idMenu = $routeMenu.'___'.$uriMenu;
+				}
+				if(!empty($uriMenu)){
+					if(!isset($uriMapTmp->$idMenu)){
+						$uriMapTmp->$idMenu = $uriMenu;
+					}	
 				}
 				if(!isset($menuRoot->$idMenu) && $parentidMenu == 0){
 					$menuRoot->$idMenu = $idMenu;
@@ -94,6 +101,13 @@ class LoginModel{
 					}
 				}
 			}
+			$breadCrumb = '
+				<li>
+					<i class="fa fa-home"></i>
+					<a href="index.html">Home</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+			';
 			$menuHtml = '	
 			';
 			foreach($menuRoot as $idMenu){
@@ -116,13 +130,23 @@ class LoginModel{
 							'.(isset($menuMap->$idMenu) ? '<span class="arrow "></span>' : '').'
 							</a>	
 					';
+					$breadCrumb .= '
+						<li>
+							<a href="#">'.$menuName.'</a>'.(isset($menuMap->$idMenu) ? '<i class="fa fa-angle-right"></i>' : '').'
+						</li>
+					';
+					if(isset($uriMapTmp->$idMenu)){
+						$uriTmp = $uriMapTmp->$idMenu;
+						$uriMap->$uriTmp = $breadCrumb;
+					}
 					if(isset($menuMap->$idMenu)){
-						$this->getChildMenu($menuMap, $menuMap->$idMenu, $menuObj, $menuHtml, $permissionList, $profile->admin, $level);
+						$this->getChildMenu($menuMap, $menuMap->$idMenu, $menuObj, $menuHtml, $permissionList, $profile->admin, $level, $uriMap, $uriMapTmp, $breadCrumb);
 					}
 					$menuHtml .= '</li>';
 				}
 			}
 			$profile->menu = $menuHtml;
+			$profile->uri_map = $uriMap;
 			$profile->permission = $permissionRole;
 			$session->set('profile', $profile);
 			$session->save();
@@ -131,7 +155,7 @@ class LoginModel{
 		$cn->close();
 		return false;
 	}
-	private function getChildMenu($menuMap, $menuChild, $menuObj, &$menuHtml, $permissionList, $admin, $level){
+	private function getChildMenu($menuMap, $menuChild, $menuObj, &$menuHtml, $permissionList, $admin, $level, &$uriMap, $uriMapTmp, $breadCrumb){
 		$level++;
 		$menuHtml .= '
 			<ul class="sub-menu">
@@ -153,8 +177,19 @@ class LoginModel{
 						<i class="'.$menuIcon.'"></i>
 								'.$menuName.''.(isset($menuMap->$idMenuChild) ? '<span class="arrow "></span>' : '').'</a>
 				';
+				
+				$breadCrumb .= '
+					<li>
+						<a href="#">'.$menuName.'</a>'.(isset($menuMap->$idMenuChild) ? '<i class="fa fa-angle-right"></i>' : '').'
+					</li>
+				';
+				if(isset($uriMapTmp->$idMenuChild)){
+					$uriTmp = $uriMapTmp->$idMenuChild;
+					$uriMap->$uriTmp = $breadCrumb;
+				}
+				
 				if(isset($menuMap->$idMenuChild)){
-					$this->getChildMenu($menuMap, $menuMap->$idMenuChild, $menuObj, $menuHtml, $permissionList, $admin, $level);		
+					$this->getChildMenu($menuMap, $menuMap->$idMenuChild, $menuObj, $menuHtml, $permissionList, $admin, $level, $uriMap, $uriMapTmp, $breadCrumb);		
 				}
 				$menuHtml .= '
 					</li>

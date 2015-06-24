@@ -1,7 +1,7 @@
 #customer page
-sc_admin_customer:
+sc_admin_customer_hidden:
     pattern:  /
     defaults: { _controller: SmartCafeAdminBundle:Customer:view }
-sc_admin_customer_get_list:
+sc_admin_customer_hidden_get_list:
     pattern:  /get-list
     defaults: { _controller: SmartCafeAdminBundle:Customer:getList }
