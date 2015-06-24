@@ -16,19 +16,9 @@ class PageBreadCrumbController extends Controller
 		$sessionLogin = $this->get('session')->get('profile');
 		$uriServer = $_SERVER['REQUEST_URI'];
 		$uriMap = isset($sessionLogin->uri_map) ? $sessionLogin->uri_map : '';
-		//print_r($uriMap); exit;
-		$breadCrumb = isset($uriMap->$uriServer) ? $uriMap->$uriServer : '';
-    	$data = array('breadCrumb' => $breadCrumb);
+		$breadCrumb = isset($uriMap->$uriServer->breadcrumb) ? $uriMap->$uriServer->breadcrumb : '';
+		$title = isset($uriMap->$uriServer->title) ? $uriMap->$uriServer->title : '';
+    	$data = array('breadCrumb' => $breadCrumb, 'title' => $title);
         return $this->render('SmartCafeAdminBundle:PageBreadCrumb:view.html.php', $data);
     }
 }
-
-
-
-
-
-
-
-
-
-

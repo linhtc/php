@@ -1,0 +1,7 @@
+#product page
+sc_admin_product_hidden:
+    pattern:  /
+    defaults: { _controller: SmartCafeAdminBundle:Product:view }
+sc_admin_product_hidden_get_list:
+    pattern:  /get-list
+    defaults: { _controller: SmartCafeAdminBundle:Product:getList }

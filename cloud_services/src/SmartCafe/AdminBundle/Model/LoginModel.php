@@ -110,6 +110,9 @@ class LoginModel{
 			';
 			$menuHtml = '	
 			';
+			//print_r($menuRoot); echo '<hr />';
+			//print_r($menuMap); echo '<hr />';
+			//print_r($uriMapTmp); echo '<hr />'; exit;
 			foreach($menuRoot as $idMenu){
 				if(isset($permissionList->$idMenu->view) || $profile->admin){
 					$runable++;
@@ -137,7 +140,9 @@ class LoginModel{
 					';
 					if(isset($uriMapTmp->$idMenu)){
 						$uriTmp = $uriMapTmp->$idMenu;
-						$uriMap->$uriTmp = $breadCrumb;
+						$uriMap->$uriTmp = new \stdClass();
+						$uriMap->$uriTmp->breadcrumb = $breadCrumb;
+						$uriMap->$uriTmp->title = $menuName;
 					}
 					if(isset($menuMap->$idMenu)){
 						$this->getChildMenu($menuMap, $menuMap->$idMenu, $menuObj, $menuHtml, $permissionList, $profile->admin, $level, $uriMap, $uriMapTmp, $breadCrumb);
@@ -160,8 +165,10 @@ class LoginModel{
 		$menuHtml .= '
 			<ul class="sub-menu">
 		';
+		
 		foreach($menuChild as $idMenuChild){
 			if(isset($permissionList->$idMenuChild->view) || $admin){
+				$breadCrumbTmp = '';
 				$objMenu = $menuObj->$idMenuChild;
 				$menuName = $objMenu->name;
 				$menuIcon = $objMenu->icon;
@@ -178,14 +185,16 @@ class LoginModel{
 								'.$menuName.''.(isset($menuMap->$idMenuChild) ? '<span class="arrow "></span>' : '').'</a>
 				';
 				
-				$breadCrumb .= '
+				$breadCrumbTmp = '
 					<li>
 						<a href="#">'.$menuName.'</a>'.(isset($menuMap->$idMenuChild) ? '<i class="fa fa-angle-right"></i>' : '').'
 					</li>
 				';
 				if(isset($uriMapTmp->$idMenuChild)){
 					$uriTmp = $uriMapTmp->$idMenuChild;
-					$uriMap->$uriTmp = $breadCrumb;
+					$uriMap->$uriTmp = new \stdClass();
+					$uriMap->$uriTmp->breadcrumb = $breadCrumb.$breadCrumbTmp;
+					$uriMap->$uriTmp->title = $menuName;
 				}
 				
 				if(isset($menuMap->$idMenuChild)){

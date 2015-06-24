@@ -1,0 +1,7 @@
+#Theme page
+sc_admin_theme_hidden:
+    pattern:  /
+    defaults: { _controller: SmartCafeAdminBundle:Theme:view }
+sc_admin_theme_hidden_get_list:
+    pattern:  /get-list
+    defaults: { _controller: SmartCafeAdminBundle:Theme:getList }

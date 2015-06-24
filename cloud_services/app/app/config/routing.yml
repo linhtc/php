@@ -1,0 +1,22 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+_welcome:
+    path:      /
+    defaults:  { _controller: AppBundle:Default:index }
+#admin home page for smart cafe
+sc_admin_dashboard:
+    prefix:      /smart-cafe/admin
+    resource: "@SmartCafeAdminBundle/Resources/config/routing.yml"
+sc_login:
+    path:      /login.html
+    defaults:  { _controller: SmartCafeAdminBundle:Login:view }
+sc_login_authentication:
+    path:      /login-authentication
+    defaults:  { _controller: SmartCafeAdminBundle:Login:authentication }
+sc_logout:
+    path:      /logout.html
+    defaults:  { _controller: SmartCafeAdminBundle:Login:logout }
+sc_lockscreen:
+    path:      /lockscreen.html
+    defaults:  { _controller: SmartCafeAdminBundle:Login:lockScreen }
