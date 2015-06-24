@@ -1641,16 +1641,18 @@ jQuery(document).ready(function() {
    	var pathname = window.location.pathname;
   	pathname = pathname.replace(new RegExp('/', 'g'), '_');
    	pathname = pathname.replace('.', '_');
-   	var level = $('.'+pathname).attr('level');
+   	var level = $('.'+pathname).attr('level'); console.log(level);
    	var obj = $('.'+pathname);
    	obj.addClass('active');
-  	for(var i = 0; i <= level; i++){
-    	obj = obj.parent();
+   var checkLevel = level;
+	while (true) {
+		obj = obj.parent();
     	var lvObj = obj.attr('level');
     	if(lvObj == 1){
     		obj.addClass('start active');
     		var objA = obj.find('a');
     		objA.append('<span class="selected"></span>');
+			break;
         }
      	var tagName = obj[0].tagName.toLowerCase();
      	if(tagName == 'ul'){
@@ -1660,7 +1662,7 @@ jQuery(document).ready(function() {
        		obj.addClass('open');
      	}
      	obj.find('span').addClass('open');
-   }
+	}
 });
 </script>
 <!-- END JAVASCRIPTS -->

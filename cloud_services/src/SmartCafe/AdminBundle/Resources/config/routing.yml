@@ -21,5 +21,8 @@ sc_admin_theme_hidden:
     resource: "@SmartCafeAdminBundle/Resources/config/routes/theme_routes.yml"
     prefix:   /theme
 sc_admin_order:
+    path:   /order.html
+    defaults: { _controller: SmartCafeAdminBundle:Order:view }
+sc_admin_order_hidden:
     resource: "@SmartCafeAdminBundle/Resources/config/routes/order_routes.yml"
     prefix:   /order

@@ -104,7 +104,7 @@ class LoginModel{
 			$breadCrumb = '
 				<li>
 					<i class="fa fa-home"></i>
-					<a href="index.html">Home</a>
+					<a href="'.($this->objCtrl->generateUrl('sc_admin_dashboard')).'">Home</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 			';
@@ -133,19 +133,19 @@ class LoginModel{
 							'.(isset($menuMap->$idMenu) ? '<span class="arrow "></span>' : '').'
 							</a>	
 					';
-					$breadCrumb .= '
+					$breadCrumbTmp = '
 						<li>
-							<a href="#">'.$menuName.'</a>'.(isset($menuMap->$idMenu) ? '<i class="fa fa-angle-right"></i>' : '').'
+							<a href="'.$menuUrl.'">'.$menuName.'</a>'.(isset($menuMap->$idMenu) ? '<i class="fa fa-angle-right"></i>' : '').'
 						</li>
 					';
 					if(isset($uriMapTmp->$idMenu)){
 						$uriTmp = $uriMapTmp->$idMenu;
 						$uriMap->$uriTmp = new \stdClass();
-						$uriMap->$uriTmp->breadcrumb = $breadCrumb;
+						$uriMap->$uriTmp->breadcrumb = $breadCrumb.$breadCrumbTmp;
 						$uriMap->$uriTmp->title = $menuName;
 					}
 					if(isset($menuMap->$idMenu)){
-						$this->getChildMenu($menuMap, $menuMap->$idMenu, $menuObj, $menuHtml, $permissionList, $profile->admin, $level, $uriMap, $uriMapTmp, $breadCrumb);
+						$this->getChildMenu($menuMap, $menuMap->$idMenu, $menuObj, $menuHtml, $permissionList, $profile->admin, $level, $uriMap, $uriMapTmp, $breadCrumb.$breadCrumbTmp);
 					}
 					$menuHtml .= '</li>';
 				}
@@ -168,7 +168,6 @@ class LoginModel{
 		
 		foreach($menuChild as $idMenuChild){
 			if(isset($permissionList->$idMenuChild->view) || $admin){
-				$breadCrumbTmp = '';
 				$objMenu = $menuObj->$idMenuChild;
 				$menuName = $objMenu->name;
 				$menuIcon = $objMenu->icon;
@@ -187,7 +186,7 @@ class LoginModel{
 				
 				$breadCrumbTmp = '
 					<li>
-						<a href="#">'.$menuName.'</a>'.(isset($menuMap->$idMenuChild) ? '<i class="fa fa-angle-right"></i>' : '').'
+						<a href="'.$menuUrl.'">'.$menuName.'</a>'.(isset($menuMap->$idMenuChild) ? '<i class="fa fa-angle-right"></i>' : '').'
 					</li>
 				';
 				if(isset($uriMapTmp->$idMenuChild)){
@@ -198,7 +197,7 @@ class LoginModel{
 				}
 				
 				if(isset($menuMap->$idMenuChild)){
-					$this->getChildMenu($menuMap, $menuMap->$idMenuChild, $menuObj, $menuHtml, $permissionList, $admin, $level, $uriMap, $uriMapTmp, $breadCrumb);		
+					$this->getChildMenu($menuMap, $menuMap->$idMenuChild, $menuObj, $menuHtml, $permissionList, $admin, $level, $uriMap, $uriMapTmp, $breadCrumb.$breadCrumbTmp);		
 				}
 				$menuHtml .= '
 					</li>
