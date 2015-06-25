@@ -56,21 +56,18 @@ Optimize = {
 	},
 	getDataWithAjax: function(page){
 		var searchs = Optimize.getFormControlValue();
-		var el = jQuery("#"+gridView);
-		var elFS = jQuery("#"+formView);
-		App.blockUI({target: el, iconOnly: true});
-        App.blockUI({target: elFS, iconOnly: false});
+		Metronic.blockUI({ target: '#'+rowManagement, boxed: true, message: 'Searching...'});
+		Metronic.blockUI({ target: '#'+rowSummary, boxed: true, message: 'Searching...'});
 		$.ajax({
 			type: "POST",
-			url: 'getList',
+			url: getListLink,
 			data: {
 				page:page, searchs:searchs
 			},
 			success: function(data) {
 				$("#"+gridView).html(data);
-				App.initAjax();
-                App.unblockUI(el);
-                App.unblockUI(elFS);
+				Metronic.unblockUI('#'+rowManagement);
+				Metronic.unblockUI('#'+rowSummary);
 				var checkEdit = $('#edit').attr('id');
 				if(checkEdit == undefined){
 					return false;
@@ -140,27 +137,23 @@ Optimize = {
 				});
 			},
 			error: function(){
-				App.initAjax();
-                App.unblockUI(el);
-                App.unblockUI(elFS);
+				Metronic.unblockUI('#'+rowManagement);
+				Metronic.unblockUI('#'+rowSummary);
+				console.log('Error loading...');
 			}
 		});
 		return false;
 	},
 	deleteDataWithAjax: function(idList){
-		var el = jQuery("#"+gridView);
-		var elFS = jQuery("#"+formView);
-		App.blockUI({target: el, iconOnly: true});
-        App.blockUI({target: elFS, iconOnly: false});
+		Metronic.blockUI({ target: '#'+rowManagement, boxed: true, message: 'Searching...'});
+		Metronic.blockUI({ target: '#'+rowSummary, boxed: true, message: 'Searching...'});
 		$.ajax({
 			type:"POST",
 			url:"delete",
 			data:{idList:idList},
 			success:function(data){
-				App.unblockUI($('.ccontent'));
-				App.initAjax();
-                App.unblockUI(el);
-                App.unblockUI(elFS);
+				Metronic.unblockUI('#'+rowManagement);
+				Metronic.unblockUI('#'+rowSummary);
 				$.msgBox({
 					title: 'Message',
 					content: data,
@@ -177,10 +170,8 @@ Optimize = {
 		});
 	},
 	saveDataWithAjax: function(id, dataPost){
-		var el = jQuery("#"+gridView);
-		var elFS = jQuery("#"+formView);
-		App.blockUI({target: el, iconOnly: true});
-        App.blockUI({target: elFS, iconOnly: false});
+		Metronic.blockUI({ target: '#'+rowManagement, boxed: true, message: 'Searching...'});
+		Metronic.blockUI({ target: '#'+rowSummary, boxed: true, message: 'Searching...'});
 		$.ajax({
 			type: "POST",
 			url: 'save',
@@ -188,9 +179,8 @@ Optimize = {
 				id:id, dataPost:dataPost
 			},
 			success: function(data) {
-				App.initAjax();
-                App.unblockUI(el);
-                App.unblockUI(elFS);
+				Metronic.unblockUI('#'+rowManagement);
+				Metronic.unblockUI('#'+rowSummary);
 				$.msgBox({
 					title: 'Message',
 					content: data,
@@ -205,9 +195,9 @@ Optimize = {
 				}); 
 			},
 			error: function(){
-				App.initAjax();
-                App.unblockUI(el);
-                App.unblockUI(elFS);
+				Metronic.unblockUI('#'+rowManagement);
+				Metronic.unblockUI('#'+rowSummary);
+				console.log('Error saving...');
 			}
 		});
 	},

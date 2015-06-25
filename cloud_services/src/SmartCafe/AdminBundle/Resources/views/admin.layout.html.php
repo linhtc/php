@@ -1594,6 +1594,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="/web/theme/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="/web/theme/assets/admin/pages/scripts/ui-blockui.js"></script>
 <script src="/web/theme/assets/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="/web/theme/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="/web/theme/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
@@ -1607,14 +1608,15 @@ jQuery(document).ready(function() {
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
    QuickSidebar.init(); // init quick sidebar
+   UIBlockUI.init(); // init blockui
 	//config selected item of menu
    	var pathname = window.location.pathname;
   	pathname = pathname.replace(new RegExp('/', 'g'), '_');
    	pathname = pathname.replace('.', '_');
-   	var level = $('.'+pathname).attr('level'); console.log(level);
+   	var level = $('.'+pathname).attr('level');
    	var obj = $('.'+pathname);
    	obj.addClass('active');
-   var checkLevel = level;
+	var checkLevel = level;
 	while (true) {
 		obj = obj.parent();
     	var lvObj = obj.attr('level');

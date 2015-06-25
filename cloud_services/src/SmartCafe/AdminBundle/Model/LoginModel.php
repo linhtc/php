@@ -68,7 +68,8 @@ class LoginModel{
 				$uriMenu = $item['uri'];
 				$iconMenu = $item['icon'];
 				if(!isset($menuRoute->$idMenu) && !empty($urlMenu) && !empty($uriMenu)){
-					$menuRoute->$idMenu = $routeMenu.'___'.$uriMenu;
+					//$menuRoute->$idMenu = $routeMenu.'___'.$uriMenu;
+					$menuRoute->$idMenu = $routeMenu;
 				}
 				if(!empty($uriMenu)){
 					if(!isset($uriMapTmp->$idMenu)){

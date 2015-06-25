@@ -19,52 +19,69 @@
 			<a class="reload" href="javascript:;"></a>
 			<a href="" class="remove" href="javascript:;"></a>
 		</div>
+        
 	</div>
 	<div class="portlet-body">
 		<div class="scroller" style="max-height:500px; overflow-y: auto">
 			<div class="table-responsive table-scrollable" style="border: none;">
-				<table class="table table-hover table-striped" style="margin-top: 15px;">
+				<table id="table-content" class="table table-hover table-striped" style="margin-top: 15px;">
 					<thead>
 					<tr>
-						<th>No.</th>
 						<?php if(isset($right['delete'])):?>
 							<th style=""><input type="checkbox" name="checkall" id="checkAll" /></th>
 						<?php endif;?>
-						<th>Program Name</th>
-						<th>Customer</th>
-						<?php if(isset($right['edit'])):?>
-							<th><b>Edit</b></th>
-						<?php endif;?>
+						<th>No.</th>
+						<th style="text-align:center;">Location</th>
+						<th style="text-align:center;">Apply time</th>
+						<th style="text-align:center;">UTC</th>
+						<th style="text-align:center;">Status</th>
+						<?php if(isset($right['edit']) && $isadmin):?>
+							<th style="text-align:center;">Edit</th>
+						<?php endif;?>	
 						<?php if(isset($right['delete']) && $isadmin):?>
 							<th style="text-align:center;">Delete</th>
-						<?php endif;?>
+						<?php endif;?>	
 					</tr>
 					</thead>
 					<tbody id="">
-					<?php $i=$pos; 
+					<?php 
+						$i=$pos; 
 						foreach($list as $item): 
-							$customerid = $item['customerid'];
-							$customer_name = $item['customer_name'];
-							$site_name = $item['site_name'];
+							$location_id = $item['location_id'];
+							$customer_id = $item['customer_id'];
+							$location_name = $item['location_name'];
+							$time_change = $item['time_change'];
+							$time_zone = 'UTC '.($item['utc_plus'] == 1 ? '+' : '-').$item['utc_string'];
 							$id_edit = $item['id'];
+							$status = $item['changed'];
+							if($status == 1){
+								$status = 'Changed';
+							} else {
+								$status = 'N/A';
+							}
 							$attr = new stdClass();
-							$attr->customerid = $customerid;
-							$attr->site_name = $site_name;
+							$attr->customer = $customer_id;
+							$attr->location_id = $location_id;
+							$attr->apply_date = date('d-M-y', strtotime($time_change));
+							$attr->apply_time = date('g:i:s', strtotime($time_change));
+							$attr->time_zone = $time_zone;
 							$attr->id_edit = $id_edit;
 					?>
-						<tr>
-							<td><?php echo ($i);?></td>
+						<tr >
 							<?php if(isset($right['delete'])):?>
 								<td style=""><input type="checkbox" name="check" class="check" value="<?php echo $item['id'];?>" /></td>
 							<?php endif;?>
-							<td class=""><?php echo $site_name; ?></td>
-							<td><?php echo $customer_name; ?></td>
+							<td style="text-align:center;"><?php echo ($i);?></td>
+							<td style="text-align:center;" class="izap_machine_sn"><?php echo $location_name;?></td>
+							<td style="text-align:center;" class="izap_machine_sn"><?php echo date('d-M-y H:i:s', strtotime($time_change));?></td>
+							<td style="text-align:center;" class="izap_machine_sn"><?php echo $time_zone;?></td>
+							<td style="text-align:center;" class="izap_machine_sn"><?php echo $status;?></td>
 							<?php if(isset($right['edit'])):?>
-							<td>
-								<a id="tr_<?php echo $item['id']?>" class="edit" datas='<?php echo json_encode($attr); ?>'  style="cursor:pointer; color:#098bdd;">
-									<i class="fa fa-edit"></i>
-								</a>
-							</td>
+								<td style="text-align:center;">
+									<a id="tr_<?php echo $item['id']?>" class="edit" datas='<?php echo json_encode($attr); ?>'  style="cursor:pointer; color:#098bdd;">
+										<i class="fa fa-edit"></i>
+									</a>
+								</td>
 							<?php endif;?>
 							<?php if(isset($right['delete']) && $isadmin):?>
 								<td style="text-align:center; ">

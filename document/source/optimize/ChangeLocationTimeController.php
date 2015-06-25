@@ -47,7 +47,7 @@ class ChangeLocationTimeController extends Controller
 		$class = get_class($this);
 		$permissions = $this->checkPermission();
         if($permissions instanceof RedirectResponse){
-            //return $permissions;
+            return $permissions;
         }
 		DataUtility::setEntityManager($this->get('doctrine.orm.entity_manager'));
 		
