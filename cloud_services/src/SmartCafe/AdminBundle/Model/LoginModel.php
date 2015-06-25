@@ -104,12 +104,15 @@ class LoginModel{
 			$breadCrumb = '
 				<li>
 					<i class="fa fa-home"></i>
-					<a href="index.html">Home</a>
+					<a href="'.($this->objCtrl->generateUrl('sc_admin_dashboard')).'">Home</a>
 					<i class="fa fa-angle-right"></i>
 				</li>
 			';
 			$menuHtml = '	
 			';
+			//print_r($menuRoot); echo '<hr />';
+			//print_r($menuMap); echo '<hr />';
+			//print_r($uriMapTmp); echo '<hr />'; exit;
 			foreach($menuRoot as $idMenu){
 				if(isset($permissionList->$idMenu->view) || $profile->admin){
 					$runable++;
@@ -130,17 +133,19 @@ class LoginModel{
 							'.(isset($menuMap->$idMenu) ? '<span class="arrow "></span>' : '').'
 							</a>	
 					';
-					$breadCrumb .= '
+					$breadCrumbTmp = '
 						<li>
-							<a href="#">'.$menuName.'</a>'.(isset($menuMap->$idMenu) ? '<i class="fa fa-angle-right"></i>' : '').'
+							<a href="'.$menuUrl.'">'.$menuName.'</a>'.(isset($menuMap->$idMenu) ? '<i class="fa fa-angle-right"></i>' : '').'
 						</li>
 					';
 					if(isset($uriMapTmp->$idMenu)){
 						$uriTmp = $uriMapTmp->$idMenu;
-						$uriMap->$uriTmp = $breadCrumb;
+						$uriMap->$uriTmp = new \stdClass();
+						$uriMap->$uriTmp->breadcrumb = $breadCrumb.$breadCrumbTmp;
+						$uriMap->$uriTmp->title = $menuName;
 					}
 					if(isset($menuMap->$idMenu)){
-						$this->getChildMenu($menuMap, $menuMap->$idMenu, $menuObj, $menuHtml, $permissionList, $profile->admin, $level, $uriMap, $uriMapTmp, $breadCrumb);
+						$this->getChildMenu($menuMap, $menuMap->$idMenu, $menuObj, $menuHtml, $permissionList, $profile->admin, $level, $uriMap, $uriMapTmp, $breadCrumb.$breadCrumbTmp);
 					}
 					$menuHtml .= '</li>';
 				}
@@ -160,6 +165,7 @@ class LoginModel{
 		$menuHtml .= '
 			<ul class="sub-menu">
 		';
+		
 		foreach($menuChild as $idMenuChild){
 			if(isset($permissionList->$idMenuChild->view) || $admin){
 				$objMenu = $menuObj->$idMenuChild;
@@ -178,18 +184,20 @@ class LoginModel{
 								'.$menuName.''.(isset($menuMap->$idMenuChild) ? '<span class="arrow "></span>' : '').'</a>
 				';
 				
-				$breadCrumb .= '
+				$breadCrumbTmp = '
 					<li>
-						<a href="#">'.$menuName.'</a>'.(isset($menuMap->$idMenuChild) ? '<i class="fa fa-angle-right"></i>' : '').'
+						<a href="'.$menuUrl.'">'.$menuName.'</a>'.(isset($menuMap->$idMenuChild) ? '<i class="fa fa-angle-right"></i>' : '').'
 					</li>
 				';
 				if(isset($uriMapTmp->$idMenuChild)){
 					$uriTmp = $uriMapTmp->$idMenuChild;
-					$uriMap->$uriTmp = $breadCrumb;
+					$uriMap->$uriTmp = new \stdClass();
+					$uriMap->$uriTmp->breadcrumb = $breadCrumb.$breadCrumbTmp;
+					$uriMap->$uriTmp->title = $menuName;
 				}
 				
 				if(isset($menuMap->$idMenuChild)){
-					$this->getChildMenu($menuMap, $menuMap->$idMenuChild, $menuObj, $menuHtml, $permissionList, $admin, $level, $uriMap, $uriMapTmp, $breadCrumb);		
+					$this->getChildMenu($menuMap, $menuMap->$idMenuChild, $menuObj, $menuHtml, $permissionList, $admin, $level, $uriMap, $uriMapTmp, $breadCrumb.$breadCrumbTmp);		
 				}
 				$menuHtml .= '
 					</li>

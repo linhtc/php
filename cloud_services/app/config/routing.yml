@@ -4,7 +4,7 @@ app:
 _welcome:
     path:      /
     defaults:  { _controller: AppBundle:Default:index }
-#admin home page
+#admin home page for smart cafe
 sc_admin_dashboard:
     prefix:      /smart-cafe/admin
     resource: "@SmartCafeAdminBundle/Resources/config/routing.yml"
@@ -18,5 +18,5 @@ sc_logout:
     path:      /logout.html
     defaults:  { _controller: SmartCafeAdminBundle:Login:logout }
 sc_lockscreen:
-    path:      /lock-screen.html
+    path:      /lockscreen.html
     defaults:  { _controller: SmartCafeAdminBundle:Login:lockScreen }

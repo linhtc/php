@@ -8,9 +8,21 @@ sc_admin_customer:
 sc_admin_customer_hidden:
     resource: "@SmartCafeAdminBundle/Resources/config/routes/customer_routes.yml"
     prefix:   /customer
-sc_admin_menu:
-    resource: "@SmartCafeAdminBundle/Resources/config/routes/menu_routes.yml"
-    prefix:   /menu
+sc_admin_product:
+    path:   /product.html
+    defaults: { _controller: SmartCafeAdminBundle:Product:view }
+sc_admin_product_hidden:
+    resource: "@SmartCafeAdminBundle/Resources/config/routes/product_routes.yml"
+    prefix:   /product
+sc_admin_theme:
+    path:   /theme.html
+    defaults: { _controller: SmartCafeAdminBundle:Theme:view }
+sc_admin_theme_hidden:
+    resource: "@SmartCafeAdminBundle/Resources/config/routes/theme_routes.yml"
+    prefix:   /theme
 sc_admin_order:
+    path:   /order.html
+    defaults: { _controller: SmartCafeAdminBundle:Order:view }
+sc_admin_order_hidden:
     resource: "@SmartCafeAdminBundle/Resources/config/routes/order_routes.yml"
     prefix:   /order

@@ -9,5 +9,5 @@
 	</div>
 </div>
 <h3 class="page-title">
-Dashboard <small>reports & statistics</small>
+<?php echo $title; ?> <!-- <small>reports & statistics</small> -->
 </h3>
