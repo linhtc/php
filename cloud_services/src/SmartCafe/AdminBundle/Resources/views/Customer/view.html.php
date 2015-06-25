@@ -9,87 +9,118 @@
 <?php $view['slots']->stop() ?>
 <!-- Main Content Here -->
 <?php $view['slots']->start('body') ?>
-<div class="portlet box blue">
-	<div class="portlet-title">
-		<div class="caption">
-			<i class="fa fa-gift"></i>Customer Management
-		</div>
-		<div class="tools">
-			<a href="javascript:;" class="collapse">
-			</a>
-			<a href="#portlet-config" data-toggle="modal" class="config">
-			</a>
-			<a href="javascript:;" class="reload">
-			</a>
-			<a href="javascript:;" class="remove">
-			</a>
-		</div>
-	</div>
-	<div class="portlet-body form">
-		<!-- BEGIN FORM-->
-		<form action="#" class="horizontal-form">
-			<div class="form-body">
-				<h3 class="form-section">Information</h3>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label class="control-label">Name</label>
-							<input type="text" id="customer_name" class="form-control obj-used" placeholder="Please input name">
-							<span class="help-block">
-							This is inline help </span>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label class="control-label">Address</label>
-							<input type="text" id="address" class="form-control obj-used" placeholder="Please input address">
-							<span class="help-block">
-							This is inline help </span>
-						</div>
-					</div>
-					<!--/span-->
-					<div class="col-md-6">
-						<div class="form-group has-error">
-							<label class="control-label">Last Name</label>
-							<input type="text" id="lastName" class="form-control" placeholder="Lim">
-							<span class="help-block">
-							This field has error. </span>
-						</div>
-					</div>
-					<!--/span-->
+<div class="row">
+	<div class="col-md-12 ">
+		<!-- BEGIN SAMPLE FORM PORTLET-->
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption font-green">
+					<i class="icon-pin font-green"></i>
+					<span class="caption-subject bold uppercase"> Management</span>
 				</div>
-				<!--/row-->
+				<div class="actions">
+					<a class="btn btn-circle btn-icon-only blue" href="javascript:;" title="Create">
+					<i class="icon-cloud-upload"></i>
+					</a>
+					<a class="btn btn-circle btn-icon-only green" href="javascript:;" title="Edit">
+					<i class="icon-wrench"></i>
+					</a>
+					<a class="btn btn-circle btn-icon-only red" href="javascript:;" title="Delete">
+					<i class="icon-trash"></i>
+					</a>
+					<a class="btn btn-circle btn-icon-only blue-madison" href="javascript:;" title="Search">
+					<i class="fa fa-search"></i>
+					</a>
+					<a class="btn btn-circle btn-icon-only blue-hoki" href="javascript:;" title="Reset">
+					<i class="fa fa-retweet"></i>
+					</a>
+					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="">
+					</a>
+				</div>
 			</div>
-			<div class="form-actions right">
-				<button type="button" class="btn default">Cancel</button>
-				<button type="submit" class="btn green"><i class="fa fa-check"></i> Save</button>
+			<div class="portlet-body form">
+				<form role="form">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group form-md-line-input has-success">
+								<div class="input-icon right">
+									<input type="text" class="form-control" placeholder="Input customer name...">
+									<label for="form_control_1">Customer name</label>
+									<span class="help-block">Please input...</span>
+									<i class="fa fa-ellipsis-h"></i>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group form-md-line-input has-success">
+								<div class="input-icon right">
+									<input type="text" class="form-control" placeholder="Input address...">
+									<label for="form_control_1">Address</label>
+									<span class="help-block">Please input...</span>
+									<i class="fa fa-ellipsis-h"></i>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group form-md-line-input has-success">
+								<div class="input-icon right">
+									<input type="text" class="form-control" placeholder="Input phone...">
+									<label for="form_control_1">Phone</label>
+									<span class="help-block">Please input...</span>
+									<i class="fa fa-ellipsis-h"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br />
+					<div class="form-actions noborder" style="display:none;">
+						<button type="button" class="btn blue">Submit</button>
+						<button type="button" class="btn default">Cancel</button>
+					</div>
+				</form>
 			</div>
-		</form>
-		<!-- END FORM-->
+		</div>
+		<!-- END SAMPLE FORM PORTLET-->
 	</div>
 </div>
-<!-- BEGIN SAMPLE TABLE PORTLET-->
-<div class="portlet box blue">
-	<div class="portlet-title">
-		<div class="caption">
-			<i class="fa fa-cogs"></i>Customer' s List
+<div class="clearfix">
+</div>
+<div class="row">
+	<div class="col-md-12 ">
+		<!-- BEGIN SAMPLE FORM PORTLET-->
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption font-green">
+					<i class="icon-pin font-green"></i>
+					<span class="caption-subject bold uppercase"> Summary</span>
+				</div>
+				<div class="actions">
+					<a class="btn btn-circle btn-icon-only blue" href="javascript:;" title="Export">
+					<i class="icon-cloud-upload"></i>
+					</a>
+					<a class="btn btn-circle btn-icon-only blue-hoki" href="javascript:;" title="Reload">
+					<i class="fa fa-retweet"></i>
+					</a>
+					<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="">
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<form role="form">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-responsive list-container">
+							
+							</div>
+						</div>
+					</div>
+					<div class="form-actions noborder">
+						
+					</div>
+				</form>
+			</div>
 		</div>
-		<div class="tools">
-			<a href="javascript:;" class="collapse">
-			</a>
-			<a href="#portlet-config" data-toggle="modal" class="config">
-			</a>
-			<a href="javascript:;" class="reload">
-			</a>
-			<a href="javascript:;" class="remove">
-			</a>
-		</div>
-	</div>
-	<div class="portlet-body">
-		<div class="table-responsive list-container">
-			
-		</div>
+		<!-- END SAMPLE FORM PORTLET-->
 	</div>
 </div>
-<!-- END SAMPLE TABLE PORTLET-->
 <?php $view['slots']->stop() ?>
