@@ -13,12 +13,24 @@ use SmartCafe\AdminBundle\Model\BaseModel;
 class PageBreadCrumbController extends Controller
 {
     public function viewAction($routeName){
-		$sessionLogin = $this->get('session')->get('profile');
+		#region get permission for page
+		$userProfile = $this->get('session')->get('profile');
 		$uriServer = $_SERVER['REQUEST_URI'];
-		$uriMap = isset($sessionLogin->uri_map) ? $sessionLogin->uri_map : '';
+		$uriMap = isset($userProfile->uri_map) ? $userProfile->uri_map : '';
 		$breadCrumb = isset($uriMap->$uriServer->breadcrumb) ? $uriMap->$uriServer->breadcrumb : '';
 		$title = isset($uriMap->$uriServer->title) ? $uriMap->$uriServer->title : '';
-    	$data = array('breadCrumb' => $breadCrumb, 'title' => $title);
+		$isadmin = isset($userProfile->isadmin) ? $userProfile->isadmin : 0;
+		$themeStyle = isset($userProfile->config->theme_style) ? $userProfile->config->theme_style : 'layout';
+		$themeColor = isset($userProfile->config->theme_color) ? $userProfile->config->theme_color : 'smart_cafe_blue';
+		#end region get permission for page
+		
+    	$data = array(
+    		'breadCrumb' => $breadCrumb, 
+    		'title' => $title,
+    		'isadmin' => $isadmin,
+    		'themeStyle' => $themeStyle,
+    		'themeColor' => $themeColor
+    	);
         return $this->render('SmartCafeAdminBundle:PageBreadCrumb:view.html.php', $data);
     }
 }

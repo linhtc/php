@@ -20,6 +20,7 @@ if(is_object($sessionLogin)){
 	$fullname = isset($sessionLogin->fullname) ? $sessionLogin->fullname : '';
 	$menuHtml = isset($sessionLogin->menu) ? $sessionLogin->menu : '';
 	$pageTitle = isset($sessionLogin->pageTitle) ? $sessionLogin->pageTitle : '';
+	$themeColor = isset($sessionLogin->config->theme_color) ? $sessionLogin->config->theme_color : 'smart_cafe_blue';
 }
  //exit;
 ?>
@@ -60,7 +61,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="/web/theme/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="/web/theme/assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="/web/theme/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
-<link id="style_color" href="/web/theme/assets/admin/layout/css/themes/smart_cafe_blue.css" rel="stylesheet" type="text/css"/>
+<link id="style_color" href="/web/theme/assets/admin/layout/css/themes/<?php echo $themeColor; ?>.css" rel="stylesheet" type="text/css"/>
 <link href="/web/theme/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 
@@ -1593,12 +1594,16 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="/web/theme/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 <script src="/web/theme/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="/web/theme/assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="/web/theme/assets/admin/pages/scripts/ui-blockui.js"></script>
 <script src="/web/theme/assets/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="/web/theme/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="/web/theme/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="/web/theme/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+<script src="/web/theme/assets/admin/pages/scripts/ui-alert-dialog-api.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- Js for each page -->
 <?php $view['slots']->output('js',false) ?>
@@ -1609,6 +1614,7 @@ jQuery(document).ready(function() {
    Layout.init(); // init layout
    QuickSidebar.init(); // init quick sidebar
    UIBlockUI.init(); // init blockui
+   UIAlertDialogApi.init();
 	//config selected item of menu
    	var pathname = window.location.pathname;
   	pathname = pathname.replace(new RegExp('/', 'g'), '_');

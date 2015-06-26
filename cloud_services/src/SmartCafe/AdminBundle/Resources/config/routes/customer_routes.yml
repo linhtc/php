@@ -5,3 +5,9 @@ sc_admin_customer_hidden:
 sc_admin_customer_hidden_get_list:
     pattern:  /get-list
     defaults: { _controller: SmartCafeAdminBundle:Customer:getList }
+sc_admin_customer_hidden_save:
+    pattern:  /save
+    defaults: { _controller: SmartCafeAdminBundle:Customer:save }
+sc_admin_customer_hidden_delete:
+    pattern:  /delete
+    defaults: { _controller: SmartCafeAdminBundle:Customer:delete }
