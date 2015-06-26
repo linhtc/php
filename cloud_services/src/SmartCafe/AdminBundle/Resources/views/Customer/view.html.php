@@ -1,4 +1,4 @@
-<?php $view->extend('SmartCafeAdminBundle::admin.layout.html.php') ?>
+<?php $view->extend('SmartCafeAdminBundle::admin.layout4.html.php') ?>
 <?php $view['slots']->start('js') ?>
 <script type="text/javascript" src="/web/js/admin/customer.js" ></script>
 <script type="text/javascript" src="/web/js/SmartCafe/admin/optimize.js" ></script>

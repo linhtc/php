@@ -1600,7 +1600,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="/web/theme/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="/web/theme/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
-<!-- Css for each page -->
+<!-- Js for each page -->
 <?php $view['slots']->output('js',false) ?>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
