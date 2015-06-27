@@ -1,3 +1,4 @@
+<?php if($themeStyle == 'layout'){ ?>
 <div class="page-bar">
 	<ul class="page-breadcrumb">
 		<?php echo $breadCrumb; ?>
@@ -11,3 +12,8 @@
 <h3 class="page-title">
 <?php echo $title; ?> <!-- <small>reports & statistics</small> -->
 </h3>
+<?php } else { ?>
+<ul class="page-breadcrumb breadcrumb">
+	<?php echo str_replace('fa-angle-right', 'fa-circle', $breadCrumb); ?>
+</ul>
+<?php } ?>

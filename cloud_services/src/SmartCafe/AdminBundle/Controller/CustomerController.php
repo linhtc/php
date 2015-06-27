@@ -13,13 +13,24 @@ use SmartCafe\AdminBundle\Model\BaseModel;
 class CustomerController extends Controller
 {
     public function viewAction($action = 'view'){
+    	$class = get_class($this);
     	$baseModel = new BaseModel($this->container);
-    	$checkPermission = $baseModel->checkPermission($this, get_class($this), $_SERVER['REQUEST_URI'], $action);
+    	$checkPermission = $baseModel->checkPermission($this, $class, $_SERVER['REQUEST_URI'], $action);
     	if($checkPermission instanceof RedirectResponse){
     		return $checkPermission;
     	}
+    	#region get permission for page
+    	$userProfile = $checkPermission;
+    	$permission = isset($userProfile->permission->$class) ? $userProfile->permission->$class : '';
+    	$isadmin = isset($userProfile->isadmin) ? $userProfile->isadmin : 0;
+    	$themeStyle = isset($userProfile->config->theme_style) ? $userProfile->config->theme_style : 'layout';
+    	$themeColor = isset($userProfile->config->theme_color) ? $userProfile->config->theme_color : 'smart_cafe_blue';
+    	#end region get permission for page
 		$data = array(
-			
+			'permission' => $permission,
+			'isadmin' => $isadmin,
+			'themeStyle' => $themeStyle,
+			'themeColor' => $themeColor
         );
         return $this->render('SmartCafeAdminBundle:Customer:view.html.php', $data);
     }
@@ -34,7 +45,7 @@ class CustomerController extends Controller
 		#end region check permission
 		
 		#region get request
-    	$request = (isset($_POST['request']) ? $_POST['request'] : '');
+    	$request = (isset($_POST['searchs']) ? $_POST['searchs'] : '');
     	$page = (isset($_POST['page']) ? $_POST['page'] : '');
 		#end region get request
 		
@@ -70,12 +81,12 @@ class CustomerController extends Controller
 		if(isset($resultSet->datas)){
 			$datas = $resultSet->datas;
 		}
-		//$pagination = Paging::getPaginationStringAjax('listData',($page), $total, 10, '', 'getAll', '?page=');
+		$pagination = $baseModel->baseGetPageMap('listData', $page, $total, 10, '', 'getAll', '?page=');
 		#end region config and search data
 		
 		$dataRender = array(
             'list' =>  $datas,
-            //'pagination' => $pagination,
+            'pagination' => $pagination,
 			'total' => $total,
 			'pos' => $pos,
 			'permission' => $permission,
@@ -83,6 +94,50 @@ class CustomerController extends Controller
         );
 		
         return $this->render('SmartCafeAdminBundle:Customer:list.html.php', $dataRender);
+    }
+    public function saveAction(){
+    	#region get request
+    	$id = $_POST['id'];
+    	$searchs = $_POST['dataPost'];
+    	$search = json_decode($searchs);
+    	#end region get request
+    	
+    	#region check permission
+    	$action = empty($id) ? 'add' : 'edit';
+    	$class = get_class($this);
+    	$baseModel = new BaseModel($this->container);
+    	$checkPermission = $baseModel->checkPermission($this, $class, $_SERVER['REQUEST_URI'], $action);
+    	if($checkPermission instanceof RedirectResponse){
+    		return 'Permission denied!';
+    	}
+    	#end region check permission
+    	
+    	#region config and execute
+    	$config = new \stdClass();
+    	$config->table = 'sc_customer';
+    	$config->checkExist = array('customer_name' => 1);
+    	$config->delIf = 'deleted';
+    	$baseModel = new BaseModel($this->container);
+    	if(empty($id)){
+    		$response = $baseModel->baseBasicInsert($search, $config);
+    	} else{
+    		$config->idEdit = $id;
+    		$response = $baseModel->baseBasicUpdate($search, $config);
+    	}
+    	#emd region config and execute
+    	
+    	return new Response($response);
+    }
+    public function deleteAction(){
+    	$idList = $_POST['idList'];
+    	$search = new \stdClass();
+    	$search->id = $idList;
+    	$config = new \stdClass();
+    	$config->table = 'sc_customer';
+    	$config->delIf = 'deleted';
+    	$baseModel = new BaseModel($this->container);
+    	$response = $baseModel->baseBasicDelete($search, $config);
+    	return new Response($response);
     }
 }
 

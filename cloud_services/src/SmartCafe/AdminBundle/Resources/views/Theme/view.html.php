@@ -1,4 +1,6 @@
-<?php $view->extend('SmartCafeAdminBundle::admin.layout.html.php') ?>
+<?php
+	$view->extend('SmartCafeAdminBundle::admin.'.$themeStyle.'.html.php') 
+?>
 <?php $view['slots']->start('js') ?>
 <script type="text/javascript" src="/web/js/admin/customer.js" ></script>
 <script>

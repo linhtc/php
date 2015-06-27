@@ -21,9 +21,19 @@ class DashboardController extends Controller
     	if($checkPermission instanceof RedirectResponse){
     		return $checkPermission;
     	}
+		#region get permission for page
+		$userProfile = $checkPermission;
+		$permission = isset($userProfile->permission->$class) ? $userProfile->permission->$class : '';
+		$isadmin = isset($userProfile->isadmin) ? $userProfile->isadmin : 0;
+		$themeStyle = isset($userProfile->config->theme_style) ? $userProfile->config->theme_style : 'layout';
+		$themeColor = isset($userProfile->config->theme_color) ? $userProfile->config->theme_color : 'smart_cafe_blue';
+		#end region get permission for page
 		$data = array(
-			
-        );
+			'permission' => $permission,
+			'isadmin' => $isadmin,
+			'themeStyle' => $themeStyle,
+			'themeColor' => $themeColor
+		);
         return $this->render('SmartCafeAdminBundle:Dashboard:view.html.php', $data);
     }
 }
