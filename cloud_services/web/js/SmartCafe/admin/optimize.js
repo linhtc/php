@@ -23,7 +23,59 @@ Optimize = {
 				$('#'+name).parent().find('.option').css({'padding-left': '20px'});
 			}
 		});
-		$('.multiple').css({'width': '100%'});
+		$('.multiple').css({'min-width' : '100%', 'width' : 'auto'});
+		
+		$("#"+gridView+" tr td").live('click',function(){
+			if(
+				$(this).parent().parent().find('.edit').length < 1 || 
+				$(this).find('.check').length > 0 || 
+				$(this).find('.delete').length > 0
+			){
+				console.log('--prevent click--');
+				if($(this).find('.check').length > 0){
+					if($('.check').parent().find($( "input[type=checkbox]:checked" )).length == $('.check').length){
+						$('#checkAll').attr("checked","checked");
+					} else {
+						$('#checkAll').removeAttr("checked");
+					}
+				}
+			} else {
+				var objTr = $(this).parent().find('.edit');
+				var id = objTr.attr('id');
+				var datas = objTr.attr('datas');
+				var p = Optimize.parseJson(datas);
+				for (var key in p) {
+					if (p.hasOwnProperty(key)) {
+						var valTmp = p[key];
+						var objTmp = $('#'+key);
+						var optsl = objTmp.attr('optsl');
+						var opttimepicker = objTmp.attr('timepicker');
+						if(optsl != undefined){
+							valTmp = valTmp.toString();
+							if(valTmp != ''){
+								$('#'+key).multipleSelect('setSelects', valTmp.split(','));
+							}
+							var optslClick = objTmp.attr('optslClick');
+							if(optslClick != undefined){
+								var func = eval(optslClick);
+								if(typeof func == 'function'){
+									func();
+								}
+							}
+						} else if(opttimepicker != undefined){
+							$('#'+key).timepicker('setTime', valTmp);
+						} else {
+							$('#'+key).val(valTmp);
+						}
+					}
+				}
+				if($('body').scrollTop() > 0){
+					$('body, html').animate({scrollTop:0}, 800);
+					console.log('execute scroll...');
+				}
+			}
+		});
+		
 		//$('.option').css({'padding-left': '20px'});
 		return false;
 	},
@@ -55,7 +107,12 @@ Optimize = {
 		return searchs;
 	},
 	getDataWithAjax: function(page){
-		var searchs = Optimize.getFormControlValue();
+		var searchs = '';
+		if(cacheSearch == '' || cacheSearch == undefined){
+			searchs = cacheSearch = Optimize.getFormControlValue();
+		} else {
+			searchs = cacheSearch;
+		}
 		Metronic.blockUI({ target: '#'+rowManagement, boxed: true, message: 'Searching...'});
 		Metronic.blockUI({ target: '#'+rowSummary, boxed: true, message: 'Searching...'});
 		$.ajax({
@@ -93,53 +150,6 @@ Optimize = {
 			                }
 			            });
 					});
-				});
-				$("#"+gridView+" tr td").live('click',function(){
-					if(
-						$(this).parent().parent().find('.edit').length < 1 || 
-						$(this).find('.check').length > 0 || 
-						$(this).find('.delete').length > 0
-					){
-						console.log('--prevent click--');
-						if($(this).find('.check').length > 0){
-							if($('.check').parent().find($( "input[type=checkbox]:checked" )).length == $('.check').length){
-								$('#checkAll').attr("checked","checked");
-							} else {
-								$('#checkAll').removeAttr("checked");
-							}
-						}
-					} else {
-						var objTr = $(this).parent().find('.edit');
-						var id = objTr.attr('id');
-						var datas = objTr.attr('datas');
-						var p = Optimize.parseJson(datas);
-						for (var key in p) {
-							if (p.hasOwnProperty(key)) {
-								var valTmp = p[key];
-								var objTmp = $('#'+key);
-								var optsl = objTmp.attr('optsl');
-								var opttimepicker = objTmp.attr('timepicker');
-								if(optsl != undefined){
-									valTmp = valTmp.toString();
-									if(valTmp != ''){
-										$('#'+key).multipleSelect('setSelects', valTmp.split(','));
-									}
-									var optslClick = objTmp.attr('optslClick');
-									if(optslClick != undefined){
-										var func = eval(optslClick);
-										if(typeof func == 'function'){
-											func();
-										}
-									}
-								} else if(opttimepicker != undefined){
-									$('#'+key).timepicker('setTime', valTmp);
-								} else {
-									$('#'+key).val(valTmp);
-								}
-							}
-						}
-						$('body, html').animate({scrollTop:0},800);
-					}
 				});
 				$("#"+gridView+" tr td").css({'text-align': 'center'});
 				$("#"+gridView+" tr th").css({'text-align': 'center'});
@@ -257,6 +267,10 @@ Optimize = {
 			}
 		});
 		$('#id_edit').val('');
+		cacheSearch = '';
+		if(cacheSearch == '' || cacheSearch == undefined){
+			Optimize.getDataWithAjax(1);
+		}
 	},
 	checkEmptyFormControl: function(){
 		var msg = '';

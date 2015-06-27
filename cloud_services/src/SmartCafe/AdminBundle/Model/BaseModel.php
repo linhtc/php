@@ -21,12 +21,12 @@ class BaseModel{
         $this->objSession = $this->objRequest->getSession();
     }
     public function checkPermission($ctrl, $class, $uri, $action = 'view'){
-    	$sessionLogin = $this->objSession->get('profile');
+    	$sessionLogin = $this->objSession->get('profile'); //print_r($sessionLogin); exit;
     	if(is_object($sessionLogin)){
     		$pattern = $class.'___'.$uri;
     		if(!isset($sessionLogin->username)){
     			return $ctrl->redirect($ctrl->generateUrl('sc_login'));
-    		} elseif(!isset($sessionLogin->permission->$pattern->$action) && !$sessionLogin->admin){
+    		} elseif(!isset($sessionLogin->permission->$class->$action) && !$sessionLogin->admin){
     			return $ctrl->redirect($ctrl->generateUrl('sc_permission_denied'));
     		} else {
     			return $sessionLogin;

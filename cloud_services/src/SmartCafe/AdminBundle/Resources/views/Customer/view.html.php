@@ -13,9 +13,14 @@
 	var formView = 'control_form';
 	var rowManagement = 'row_ui_management';
 	var rowSummary = 'row_ui_summary';
+	var cacheSearch = '';
 	
 	Optimize.initFormControl();
-	$('#control_search, #control_reload').click(function(){
+	$('#control_search').click(function(){
+		cacheSearch = '';
+		Optimize.getDataWithAjax(1);
+	});
+	$('#control_reload').click(function(){
 		Optimize.getDataWithAjax(1);
 	});
 	$('#control_reset').click(function(){

@@ -30,8 +30,9 @@ class LoginModel{
 			SELECT u.*, g.group_name, g.customer_id, g.permission, g.admin, c.customer_name,
 			(
 				SELECT CONCAT_WS(';;;', cf.theme_style, cf.theme_color)
-				FROM cs_config cf
-				WHERE cf.project = 'smart_cafe' AND cf.activated = 1 AND cf.deleted = 0
+				FROM cs_config cf INNER JOIN cs_config_user cfu
+				ON cf.id = cfu.config_id
+				WHERE cf.deleted = 0 AND cfu.deleted = 0 AND cf.project = 'smart_cafe' AND cfu.username = '".$username."'
 				LIMIT 1
 			) config
 			FROM sc_user u INNER JOIN sc_group g ON u.group_id = g.id INNER JOIN sc_customer c ON g.customer_id = c.id
