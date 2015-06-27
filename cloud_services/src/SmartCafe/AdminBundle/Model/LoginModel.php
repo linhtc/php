@@ -31,11 +31,11 @@ class LoginModel{
 			(
 				SELECT CONCAT_WS(';;;', cf.theme_style, cf.theme_color)
 				FROM cs_config cf
-				WHERE cf.project = 'smart_cafe' AND cf.active = 1
+				WHERE cf.project = 'smart_cafe' AND cf.activated = 1 AND cf.deleted = 0
 				LIMIT 1
 			) config
 			FROM sc_user u INNER JOIN sc_group g ON u.group_id = g.id INNER JOIN sc_customer c ON g.customer_id = c.id
-			WHERE u.username = 'root' AND u.deleted = 0
+			WHERE u.username = '".$username."' AND u.password = '".$password."' AND u.deleted = 0
 			AND c.deleted = 0 AND g.deleted = 0 AND u.deleted = 0;
 		";
 		$objUser = $cn->fetchAll($sql);
