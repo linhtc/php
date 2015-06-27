@@ -22,14 +22,29 @@ CREATE TABLE `cs_config` (
   `theme_style` varchar(20) DEFAULT NULL,
   `theme_color` varchar(20) DEFAULT NULL,
   `project` varchar(20) DEFAULT NULL,
-  `activated` tinyint(1) DEFAULT '0',
   `deleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cs_config` */
 
-insert  into `cs_config`(`id`,`theme_style`,`theme_color`,`project`,`activated`,`deleted`) values (1,'layout','smart_cafe_blue','smart_cafe',0,0),(2,'layout4','light','smart_cafe',1,0),(3,'layout','darkblue','smart_cafe',0,0);
+insert  into `cs_config`(`id`,`theme_style`,`theme_color`,`project`,`deleted`) values (1,'layout','smart_cafe_blue','smart_cafe',0),(2,'layout4','light','smart_cafe',0),(3,'layout','darkblue','smart_cafe',0),(4,'layout','blue','homeland',0);
+
+/*Table structure for table `cs_config_user` */
+
+DROP TABLE IF EXISTS `cs_config_user`;
+
+CREATE TABLE `cs_config_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) DEFAULT NULL,
+  `config_id` int(11) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `cs_config_user` */
+
+insert  into `cs_config_user`(`id`,`username`,`config_id`,`deleted`) values (1,'root',2,0),(2,'root',4,0);
 
 /*Table structure for table `sc_customer` */
 
@@ -74,7 +89,7 @@ CREATE TABLE `sc_group` (
 
 /*Data for the table `sc_group` */
 
-insert  into `sc_group`(`id`,`group_name`,`admin`,`parent_id`,`customer_id`,`permission`,`time_created`,`user_created`,`time_modified`,`user_modified`,`deleted`) values (1,'Admin',1,0,1,'{\"16\":{\"view\":1,\"add\":1,\"edit\":1,\"delete\":1,\"export\":1},\"2\":{\"view\":1},\"3\":{\"view\":1},\"4\":{\"view\":1},\"5\":{\"view\":1},\"6\":{\"view\":1},\"7\":{\"view\":1},\"8\":{\"view\":1},\"9\":{\"view\":1},\"10\":{\"view\":1}}',NULL,NULL,NULL,NULL,0),(2,'Boss',0,0,2,'{\"1\":{\"view\":1},\"2\":{\"view\":1},\"3\":{\"view\":1},\"4\":{\"view\":1},\"5\":{\"view\":1},\"6\":{\"view\":1},\"7\":{\"view\":1},\"8\":{\"view\":1},\"9\":{\"view\":1},\"10\":{\"view\":1}}',NULL,NULL,NULL,NULL,0),(3,'Cashier',0,2,2,'{\"1\":{\"view\":1},\"2\":{\"view\":1},\"3\":{\"view\":1},\"4\":{\"view\":1},\"5\":{\"view\":1},\"6\":{\"view\":1}}',NULL,NULL,NULL,NULL,0);
+insert  into `sc_group`(`id`,`group_name`,`admin`,`parent_id`,`customer_id`,`permission`,`time_created`,`user_created`,`time_modified`,`user_modified`,`deleted`) values (1,'Admin',1,0,1,'{\"16\":{\"view\":1,\"add\":1,\"edit\":1,\"delete\":1,\"export\":1},\"2\":{\"view\":1},\"3\":{\"view\":1},\"4\":{\"view\":1},\"5\":{\"view\":1},\"6\":{\"view\":1},\"7\":{\"view\":1},\"8\":{\"view\":1},\"9\":{\"view\":1},\"10\":{\"view\":1}}',NULL,NULL,NULL,NULL,0),(2,'Boss',0,0,2,'{\"16\":{\"view\":1,\"add\":1,\"edit\":1,\"delete\":1,\"export\":1},\"21\":{\"view\":1},\"24\":{\"view\":1},\"14\":{\"view\":1},\"20\":{\"view\":1},\"23\":{\"view\":1},\"15\":{\"view\":1}}',NULL,NULL,NULL,NULL,0),(3,'Cashier',0,2,2,'{\"1\":{\"view\":1},\"2\":{\"view\":1},\"3\":{\"view\":1},\"4\":{\"view\":1},\"5\":{\"view\":1},\"6\":{\"view\":1}}',NULL,NULL,NULL,NULL,0);
 
 /*Table structure for table `sc_menu` */
 
@@ -123,11 +138,11 @@ CREATE TABLE `sc_user` (
   `user_modified` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `sc_user` */
 
-insert  into `sc_user`(`id`,`username`,`password`,`fullname`,`email`,`address`,`phone`,`country`,`avatar`,`group_id`,`time_created`,`user_created`,`time_modified`,`user_modified`,`deleted`) values (1,'root','051181fa3bf066ee4e1034013fa4940f','Administrator','admin@smartcafe.com','Ho Chi Minh City','+84123',236,NULL,1,NULL,NULL,NULL,NULL,0),(2,'boss','1afb1d07cd2b3201aae3e28a18916b3b','Boss','boss@boss.com','HCMC','+841234',236,NULL,2,NULL,NULL,NULL,NULL,0);
+insert  into `sc_user`(`id`,`username`,`password`,`fullname`,`email`,`address`,`phone`,`country`,`avatar`,`group_id`,`time_created`,`user_created`,`time_modified`,`user_modified`,`deleted`) values (1,'root','051181fa3bf066ee4e1034013fa4940f','Administrator','admin@smartcafe.com','Ho Chi Minh City','+84123',236,NULL,1,NULL,NULL,NULL,NULL,0),(2,'boss','1afb1d07cd2b3201aae3e28a18916b3b','Boss','boss@boss.com','HCMC','+841234',236,NULL,2,NULL,NULL,NULL,NULL,0),(3,'test','8399bc113c4097b7391406efd329e01e','Tester','test@test.com','Ho Chi Minh City',NULL,236,NULL,2,NULL,NULL,NULL,NULL,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
