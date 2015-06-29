@@ -1,0 +1,7 @@
+#admin home page
+sc_admin_service:
+    path:   /
+    defaults: { _controller: ServiceBundle:Service:switch }
+sc_admin_service_coffee_table_list:
+    path:   /coffee-table-list
+    defaults: { _controller: ServiceBundle:Service:coffeeTableList }

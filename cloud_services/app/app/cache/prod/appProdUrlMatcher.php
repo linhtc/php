@@ -41,42 +41,28 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => '_welcome',);
         }
 
-        if (0 === strpos($pathinfo, '/smart-cafe/admin')) {
+        if (0 === strpos($pathinfo, '/admin')) {
             // sc_admin_dashboard
-            if ($pathinfo === '/smart-cafe/admin/dashboard.html') {
+            if ($pathinfo === '/admin/dashboard.html') {
                 return array (  '_controller' => 'SmartCafe\\AdminBundle\\Controller\\DashboardController::viewAction',  '_route' => 'sc_admin_dashboard',);
             }
 
-            if (0 === strpos($pathinfo, '/smart-cafe/admin/customer')) {
+            if (0 === strpos($pathinfo, '/admin/customer')) {
                 // sc_admin_customer
-                if ($pathinfo === '/smart-cafe/admin/customer.html') {
-                    return array (  '_controller' => 'SmartCafe\\AdminBundle\\Controller\\CustomerController::viewAction',  '_route' => 'sc_admin_customer',);
+                if ($pathinfo === '/admin/customer/view.html') {
+                    return array (  '_controller' => 'AdminBundle:Customer:view',  '_route' => 'sc_admin_customer',);
                 }
 
-                // sc_admin_customer_hidden
-                if (rtrim($pathinfo, '/') === '/smart-cafe/admin/customer') {
-                    if (substr($pathinfo, -1) !== '/') {
-                        return $this->redirect($pathinfo.'/', 'sc_admin_customer_hidden');
-                    }
-
-                    return array (  '_controller' => 'SmartCafe\\AdminBundle\\Controller\\CustomerController::viewAction',  '_route' => 'sc_admin_customer_hidden',);
-                }
-
-                // sc_admin_customer_hidden_get_list
-                if ($pathinfo === '/smart-cafe/admin/customer/get-list') {
-                    return array (  '_controller' => 'SmartCafe\\AdminBundle\\Controller\\CustomerController::getListAction',  '_route' => 'sc_admin_customer_hidden_get_list',);
+                // sc_admin_customer_get_list
+                if ($pathinfo === '/admin/customer/get-list.html') {
+                    return array (  '_controller' => 'AdminBundle:Customer:getList',  '_route' => 'sc_admin_customer_get_list',);
                 }
 
             }
 
             // sc_admin_menu
-            if ($pathinfo === '/smart-cafe/admin/menu/view.html') {
+            if ($pathinfo === '/admin/menu/menu.html') {
                 return array (  '_controller' => 'AdminBundle:Menu:view',  '_route' => 'sc_admin_menu',);
-            }
-
-            // sc_admin_order
-            if ($pathinfo === '/smart-cafe/admin/order/view.html') {
-                return array (  '_controller' => 'AdminBundle:Menu:view',  '_route' => 'sc_admin_order',);
             }
 
         }

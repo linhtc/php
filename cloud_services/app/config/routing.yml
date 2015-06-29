@@ -8,6 +8,10 @@ _welcome:
 sc_admin_dashboard:
     prefix:      /smart-cafe/admin
     resource: "@SmartCafeAdminBundle/Resources/config/routing.yml"
+#service routing
+sc_admin_service:
+    prefix:      /smart-cafe/service
+    resource: "@ServiceBundle/routing.yml"
 sc_login:
     path:      /login.html
     defaults:  { _controller: SmartCafeAdminBundle:Login:view }
