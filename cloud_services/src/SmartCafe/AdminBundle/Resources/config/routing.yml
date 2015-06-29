@@ -26,3 +26,9 @@ sc_admin_order:
 sc_admin_order_hidden:
     resource: "@SmartCafeAdminBundle/Resources/config/routes/order_routes.yml"
     prefix:   /order
+sc_admin_coffee_table_over_view:
+    path:   /coffee-table-over-view.html
+    defaults: { _controller: SmartCafeAdminBundle:CoffeeTableOverView:view }
+sc_admin_coffee_table_over_view_hidden:
+    resource: "@SmartCafeAdminBundle/Resources/config/routes/coffee_table_over_view_routes.yml"
+    prefix:   /coffee-table-over-view

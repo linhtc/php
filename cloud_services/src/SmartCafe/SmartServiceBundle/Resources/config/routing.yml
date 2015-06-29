@@ -1,0 +1,4 @@
+#admin home page
+sc_admin_smart_service:
+    resource: "@SmartServiceBundle/Resources/config/routes/smart_service_routes.yml"
+    prefix:   /

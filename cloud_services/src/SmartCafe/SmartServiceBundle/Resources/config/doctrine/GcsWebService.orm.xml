@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsWebService" table="gcs_web_service">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="stationSerialNumber" type="string" column="station_serial_number" length="255" nullable="true"/>
+    <field name="status" type="integer" column="status" nullable="true"/>
+    <field name="dataResponse" type="text" column="data_response" nullable="true"/>
+    <field name="finished" type="integer" column="finished" nullable="true"/>
+    <field name="fieldsReturn" type="string" column="fields_return" length="255" nullable="true"/>
+    <field name="searchBy" type="text" column="search_by" nullable="true"/>
+  </entity>
+</doctrine-mapping>

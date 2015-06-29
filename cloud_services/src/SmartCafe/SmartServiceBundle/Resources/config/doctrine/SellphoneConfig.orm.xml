@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\SellphoneConfig" table="sellphone_config">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="riskFactor" type="float" column="risk_factor" precision="10" scale="0" nullable="true"/>
+    <field name="logisticCost" type="float" column="logistic_cost" precision="10" scale="0" nullable="true"/>
+    <field name="likenewDiscount" type="float" column="likenew_discount" precision="10" scale="0" nullable="true"/>
+    <field name="usedDiscount" type="float" column="used_discount" precision="10" scale="0" nullable="true"/>
+    <field name="damagedDiscount" type="float" column="damaged_discount" precision="10" scale="0" nullable="true"/>
+    <field name="currencyExchange" type="float" column="currency_exchange" precision="10" scale="0" nullable="true"/>
+    <field name="labourCostLevel1" type="float" column="labour_cost_level1" precision="10" scale="0" nullable="true"/>
+    <field name="labourCostLevel2" type="float" column="labour_cost_level2" precision="10" scale="0" nullable="true"/>
+    <field name="labourCostLevel3" type="float" column="labour_cost_level3" precision="10" scale="0" nullable="true"/>
+    <field name="charity" type="float" column="charity" precision="10" scale="0" nullable="true"/>
+    <field name="bonus" type="float" column="bonus" precision="10" scale="0" nullable="true"/>
+    <field name="rebate" type="float" column="rebate" precision="10" scale="0" nullable="true"/>
+    <field name="markdown" type="float" column="markdown" precision="10" scale="0" nullable="true"/>
+    <field name="userId" type="integer" column="user_id" nullable="true"/>
+    <field name="defaultLikenewPrice" type="integer" column="default_likenew_price" nullable="true"/>
+    <field name="defaultUsedPrice" type="integer" column="default_used_price" nullable="true"/>
+    <field name="defaultDamagedPrice" type="integer" column="default_damaged_price" nullable="true"/>
+  </entity>
+</doctrine-mapping>

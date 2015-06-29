@@ -42,7 +42,6 @@ while (true) {
 		$found_socket = array_search($socket, $changed);
 		unset($changed[$found_socket]);
 	}
-	
 	//loop through all connected sockets
 	foreach ($changed as $changed_socket) {	
 		

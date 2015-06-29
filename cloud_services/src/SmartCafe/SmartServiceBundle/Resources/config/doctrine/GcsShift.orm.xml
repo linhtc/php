@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsShift" table="gcs_shift">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="shift" type="string" column="shift" length="255" nullable="true"/>
+    <field name="start" type="string" column="start" length="255" nullable="true"/>
+    <field name="end" type="string" column="end" length="255" nullable="true"/>
+  </entity>
+</doctrine-mapping>

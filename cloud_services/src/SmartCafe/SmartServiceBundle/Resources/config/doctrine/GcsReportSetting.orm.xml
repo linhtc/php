@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsReportSetting" table="gcs_report_setting">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="reportIdentifier" type="string" column="report_identifier" length="25" nullable="true"/>
+    <field name="reportName" type="string" column="report_name" length="100" nullable="true"/>
+    <field name="customerName" type="text" column="customer_name" nullable="true"/>
+    <field name="requestPerson" type="text" column="request_person" nullable="true"/>
+    <field name="requestPersonEmail" type="text" column="request_person_email" nullable="true"/>
+    <field name="toEmail" type="text" column="to_email" nullable="true"/>
+    <field name="toEmailName" type="text" column="to_email_name" nullable="true"/>
+    <field name="ccEmail" type="text" column="cc_email" nullable="true"/>
+    <field name="ccEmailName" type="text" column="cc_email_name" nullable="true"/>
+    <field name="firstDeliveryDate" type="date" column="first_delivery_date" nullable="true"/>
+    <field name="dateStart" type="date" column="date_start" nullable="true"/>
+    <field name="reportDuration" type="integer" column="report_duration" nullable="true"/>
+    <field name="reportDurationTemp" type="string" column="report_duration_temp" length="100" nullable="true"/>
+    <field name="deliverySchedule" type="text" column="delivery_schedule" nullable="true"/>
+    <field name="usercreated" type="string" column="usercreated" length="25" nullable="true"/>
+    <field name="userupdated" type="string" column="userupdated" length="25" nullable="true"/>
+    <field name="datecreated" type="datetime" column="datecreated" nullable="true"/>
+    <field name="dateupdated" type="datetime" column="dateupdated" nullable="true"/>
+    <field name="lastSent" type="datetime" column="last_sent" nullable="true"/>
+    <field name="delif" type="boolean" column="delif" nullable="true"/>
+  </entity>
+</doctrine-mapping>

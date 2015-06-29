@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\IrsaPrice" table="irsa_price">
+    <indexes>
+      <index name="model_id" columns="model_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="modelId" type="integer" column="model_id" nullable="true"/>
+    <field name="specId" type="string" column="spec_id" length="255" nullable="true"/>
+    <field name="countryId" type="integer" column="country_id" nullable="true"/>
+    <field name="carrierId" type="integer" column="carrier_id" nullable="true"/>
+    <field name="level1" type="float" column="level1" precision="10" scale="0" nullable="true"/>
+    <field name="level2" type="float" column="level2" precision="10" scale="0" nullable="true"/>
+    <field name="level3" type="float" column="level3" precision="10" scale="0" nullable="true"/>
+    <field name="delif" type="integer" column="delif" nullable="true"/>
+    <field name="marketpricermb" type="float" column="marketpricermb" precision="10" scale="0" nullable="true"/>
+    <field name="machineSn" type="string" column="machine_sn" length="11" nullable="true"/>
+    <field name="sync" type="integer" column="sync" nullable="true"/>
+    <field name="userId" type="integer" column="user_id" nullable="true"/>
+  </entity>
+</doctrine-mapping>

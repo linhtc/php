@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsShiftSetting" table="gcs_shift_setting">
+    <indexes>
+      <index name="user_id" columns="user_id"/>
+      <index name="shift_id" columns="shift_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id"/>
+    <id name="lastSelected" type="boolean" column="last_selected"/>
+    <many-to-one field="shift" target-entity="GcsShift">
+      <join-columns>
+        <join-column name="shift_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="user" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

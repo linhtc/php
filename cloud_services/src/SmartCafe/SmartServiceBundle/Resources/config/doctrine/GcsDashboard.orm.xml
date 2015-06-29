@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsDashboard" table="gcs_dashboard">
+    <indexes>
+      <index name="model_id" columns="model_id"/>
+      <index name="idx_date" columns="erase_datetime"/>
+      <index name="incoming_by_userzlog_140404004" columns="erase_id,erase_datetime,process_type,erase_userid,site_name,device_os_type,user_id"/>
+      <index name="user_id" columns="user_id"/>
+      <index name="hung" columns="user_id,erase_datetime,process_type,erase_userid,site_name"/>
+    </indexes>
+    <id name="eraseId" type="integer" column="erase_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="halongSerial" type="string" column="halong_serial" length="100" nullable="true"/>
+    <field name="modelId" type="integer" column="model_id" nullable="true"/>
+    <field name="eraseUserid" type="string" column="erase_userid" length="100" nullable="true"/>
+    <field name="eraseDatetime" type="datetime" column="erase_datetime" nullable="true"/>
+    <field name="eraseLogfile" type="blob" column="erase_logfile" nullable="true"/>
+    <field name="eraseImei" type="string" column="erase_imei" length="100" nullable="true"/>
+    <field name="eraseMeid" type="string" column="erase_meid" length="50" nullable="true"/>
+    <field name="eraseStatus" type="integer" column="erase_status" nullable="true"/>
+    <field name="eraseVerify" type="integer" column="erase_verify" nullable="true"/>
+    <field name="eraseCredit" type="integer" column="erase_credit" nullable="true"/>
+    <field name="eraseHash" type="string" column="erase_hash" length="100" nullable="true"/>
+    <field name="customerName" type="string" column="customer_name" length="50" nullable="true"/>
+    <field name="eraseMethod" type="string" column="erase_method" length="25" nullable="true"/>
+    <field name="resultDetail" type="text" column="result_detail" nullable="true"/>
+    <field name="deviceManufacturer" type="string" column="device_manufacturer" length="50" nullable="true"/>
+    <field name="deviceCarrier" type="string" column="device_carrier" length="25" nullable="true"/>
+    <field name="deviceBaseband" type="string" column="device_baseband" length="25" nullable="true"/>
+    <field name="deviceFirmware" type="string" column="device_firmware" length="25" nullable="true"/>
+    <field name="deviceCapacity" type="string" column="device_capacity" length="25" nullable="true"/>
+    <field name="deviceWifiAddress" type="string" column="device_wifi_address" length="25" nullable="true"/>
+    <field name="deviceBluetoothAddress" type="string" column="device_bluetooth_address" length="25" nullable="true"/>
+    <field name="deviceModelNumber" type="string" column="device_model_number" length="50" nullable="true"/>
+    <field name="deviceColor" type="string" column="device_color" length="25" nullable="true"/>
+    <field name="deviceOsType" type="string" column="device_os_type" length="25" nullable="true"/>
+    <field name="deviceSn" type="string" column="device_sn" length="25" nullable="true"/>
+    <field name="elapsetime" type="string" column="elapsetime" length="25" nullable="true"/>
+    <field name="deviceOsVersion" type="string" column="device_os_version" length="25" nullable="true"/>
+    <field name="deviceFmip" type="string" column="device_fmip" length="25" nullable="true"/>
+    <field name="deviceBricked" type="string" column="device_bricked" length="25" nullable="true"/>
+    <field name="eraseErrorCode" type="string" column="erase_error_code" length="255" nullable="true"/>
+    <field name="functionTest" type="text" column="function_test" nullable="true"/>
+    <field name="processType" type="string" column="process_type" length="25" nullable="true"/>
+    <field name="dateReceived" type="datetime" column="date_received" nullable="true"/>
+    <field name="pushedDate" type="datetime" column="pushed_date" nullable="true"/>
+    <field name="pushedResultDate" type="datetime" column="pushed_result_date" nullable="true"/>
+    <field name="pushedStatus" type="integer" column="pushed_status" nullable="true"/>
+    <field name="pushedResult" type="text" column="pushed_result" nullable="true"/>
+    <field name="pushedData" type="text" column="pushed_data" nullable="true"/>
+    <field name="siteName" type="string" column="site_name" length="25" nullable="true"/>
+    <field name="siteType" type="string" column="site_type" length="25" nullable="true"/>
+    <field name="delIf" type="integer" column="del_if" nullable="true"/>
+    <field name="userId" type="integer" column="user_id" nullable="true"/>
+    <field name="customer" type="string" column="customer" length="100" nullable="true"/>
+    <field name="stationSerial" type="string" column="station_serial" length="50" nullable="true"/>
+    <field name="stationType" type="string" column="station_type" length="50" nullable="true"/>
+  </entity>
+</doctrine-mapping>

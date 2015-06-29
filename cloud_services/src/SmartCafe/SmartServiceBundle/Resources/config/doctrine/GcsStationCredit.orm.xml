@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsStationCredit" table="gcs_station_credit">
+    <indexes>
+      <index name="IDX_6FA6256816FE72E1" columns="updated_by"/>
+      <index name="IDX_6FA62568DE12AB56" columns="created_by"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="station_id" columns="station_id"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="registeredQty" type="float" column="registered_qty" precision="10" scale="0" nullable="true"/>
+    <field name="erasableQty" type="float" column="erasable_qty" precision="10" scale="0" nullable="true"/>
+    <field name="erasedQty" type="float" column="erased_qty" precision="10" scale="0" nullable="true"/>
+    <field name="note" type="string" column="note" length="255" nullable="true"/>
+    <field name="action" type="string" column="action" length="25" nullable="true"/>
+    <field name="createdDate" type="datetime" column="created_date" nullable="true"/>
+    <field name="updatedDate" type="datetime" column="updated_date" nullable="true"/>
+    <many-to-one field="createdBy" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="created_by" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="station" target-entity="GcsStation">
+      <join-columns>
+        <join-column name="station_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="updatedBy" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="updated_by" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

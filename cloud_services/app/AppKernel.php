@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new SmartCafe\AdminBundle\SmartCafeAdminBundle(),
             new SmartCafe\ServiceBundle\ServiceBundle(),
+            new SmartCafe\SmartServiceBundle\SmartServiceBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

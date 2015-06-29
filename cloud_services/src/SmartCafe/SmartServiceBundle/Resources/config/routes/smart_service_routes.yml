@@ -1,0 +1,4 @@
+#admin home page
+sc_admin_smart_service:
+    pattern:  /smart-service.html
+    defaults: { _controller: SmartServiceBundle:SmartService:view }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GdsMobileUser" table="gds_mobile_user">
+    <indexes>
+      <index name="FK_gds_mobile_user" columns="group_id"/>
+    </indexes>
+    <id name="userName" type="string" column="user_name" length="100">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="password" type="string" column="password" length="100" nullable="true"/>
+    <field name="firstName" type="string" column="first_name" length="100" nullable="true"/>
+    <field name="lastName" type="string" column="last_name" length="100" nullable="true"/>
+    <field name="companyName" type="string" column="company_name" length="100" nullable="true"/>
+    <field name="phoneNumber" type="string" column="phone_number" length="30" nullable="true"/>
+    <field name="fax" type="string" column="fax" length="30" nullable="true"/>
+    <field name="cellphone" type="string" column="cellphone" length="30" nullable="true"/>
+    <field name="address" type="text" column="address" nullable="true"/>
+    <field name="address2" type="text" column="address_2" nullable="true"/>
+    <field name="city" type="string" column="city" length="100" nullable="true"/>
+    <field name="state" type="string" column="state" length="100" nullable="true"/>
+    <field name="zipcode" type="string" column="zipcode" length="10" nullable="true"/>
+    <field name="country" type="string" column="country" length="100" nullable="true"/>
+    <field name="email" type="string" column="email" length="100" nullable="true"/>
+    <field name="notes" type="text" column="notes" nullable="true"/>
+    <field name="type" type="integer" column="type" nullable="true"/>
+    <field name="status" type="integer" column="status" nullable="true"/>
+    <field name="adminCreate" type="string" column="admin_create" length="100" nullable="true"/>
+    <field name="adminUpdate" type="string" column="admin_update" length="100" nullable="true"/>
+    <field name="dateCreate" type="datetime" column="date_create" nullable="true"/>
+    <field name="dateUpdate" type="datetime" column="date_update" nullable="true"/>
+    <field name="delIf" type="integer" column="del_if" nullable="true"/>
+    <field name="salesman" type="string" column="salesman" length="255" nullable="true"/>
+    <many-to-one field="group" target-entity="GdsMobileGroup">
+      <join-columns>
+        <join-column name="group_id" referenced-column-name="group_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

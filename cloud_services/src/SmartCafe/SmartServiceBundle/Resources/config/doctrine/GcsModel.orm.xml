@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Gcs\AdminBundle\Entity\GcsModel" table="gcs_model">
+    <indexes>
+      <index name="IDX_B180AACBF603EE73" columns="vendor_id"/>
+      <index name="IDX_B180AACBD21ED102" columns="admin_create"/>
+      <index name="IDX_B180AACBC5ED0481" columns="admin_update"/>
+      <index name="model_name" columns="model_name"/>
+      <index name="def_tier" columns="tier"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="productId" type="integer" column="product_id" nullable="true"/>
+    <field name="modelName" type="string" column="model_name" length="255" nullable="true"/>
+    <field name="productName" type="string" column="product_name" length="255" nullable="true"/>
+    <field name="modelDescription" type="text" column="model_description" nullable="true"/>
+    <field name="dateCreate" type="datetime" column="date_create" nullable="true"/>
+    <field name="dateUpdate" type="datetime" column="date_update" nullable="true"/>
+    <field name="delIf" type="integer" column="del_if" nullable="true"/>
+    <field name="tier" type="integer" column="tier" nullable="true"/>
+    <field name="credit" type="integer" column="credit" nullable="true"/>
+    <field name="price" type="float" column="price" precision="10" scale="0" nullable="true"/>
+    <field name="capacityBattery" type="integer" column="capacity_battery" nullable="true"/>
+    <field name="lostCurrent" type="integer" column="lost_current" nullable="true"/>
+    <field name="finishedCurrent" type="integer" column="finished_current" nullable="true"/>
+    <field name="testingTime" type="integer" column="testing_time" nullable="true"/>
+    <field name="codeBattery" type="string" column="code_battery" length="255" nullable="true"/>
+    <many-to-one field="adminUpdate" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="admin_update" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="adminCreate" target-entity="GcsUser">
+      <join-columns>
+        <join-column name="admin_create" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="vendor" target-entity="GcsVendor">
+      <join-columns>
+        <join-column name="vendor_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
