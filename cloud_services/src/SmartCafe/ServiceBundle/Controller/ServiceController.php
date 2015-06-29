@@ -54,7 +54,7 @@ class ServiceController extends Controller
 		#end region get permission for page
 		
 		$sql = '
-			SELECT 	cf.coffee_table_name, cf.zone_id, cfo.coffee_table_id, cfo.quantity,
+			SELECT 	cf.id coffee_table_id, cf.coffee_table_name, cf.zone_id,  cfo.coffee_menu_id, cfo.quantity,
 				cfo.session, cfo.status, cm.coffee_menu_name, cm.coffee_menu_price
 			FROM sc_coffee_table cf LEFT JOIN sc_coffee_table_order cfo
 				ON cf.customer_id = cfo.customer_id AND cf.id = cfo.coffee_table_id
@@ -64,7 +64,42 @@ class ServiceController extends Controller
 		';
 		$baseModel = new BaseModel($this->container);
 		$list = $baseModel->executeQuery($sql);
-		print_r($list); exit;
+		
+		$response = new \stdClass();
+		if(count($list) > 0){
+			foreach($list as $item){
+				$coffee_table_id = $item['coffee_table_id'];
+				$coffee_table_name = $item['coffee_table_name'];
+				$zone_id = $item['zone_id'];
+				$coffee_menu_id = !empty($item['coffee_menu_id']) ? $item['coffee_menu_id'] : null;
+				$coffee_menu_name = !empty($item['coffee_menu_name']) ? $item['coffee_menu_name'] : null;
+				$coffee_menu_price = !empty($item['coffee_menu_price']) ? $item['coffee_menu_price'] : null;
+				$status = !empty($item['status']) ? $item['status'] : null;
+				$quantity = !empty($item['quantity']) ? $item['quantity'] : 0;
+				$session_order = !empty($item['session']) ? $item['session'] : null;
+				$ordering = new \stdClass();
+				$ordering->quantity = $quantity;
+				$ordering->coffee_menu_id = $coffee_menu_id;
+				$ordering->coffee_menu_name = $coffee_menu_name;
+				$ordering->coffee_menu_price = $coffee_menu_price;
+				if(!isset($response->$coffee_table_id)){
+					$response->$coffee_table_id = new \stdClass();
+					$response->$coffee_table_id->coffee_table_name = $coffee_table_name;
+					$response->$coffee_table_id->status = $status;
+					$response->$coffee_table_id->session = $session_order;
+					$response->$coffee_table_id->total = $quantity;
+					$response->$coffee_table_id->ordering = new \stdClass();
+					if(!empty($coffee_menu_id)){
+						$response->$coffee_table_id->ordering->$coffee_menu_id = $ordering;
+					}
+				} else{
+					$response->$coffee_table_id->total += $quantity;
+					if(!empty($coffee_menu_id)){
+						$response->$coffee_table_id->ordering->$coffee_menu_id = $ordering;
+					}
+				}
+			}
+		}
 		return $response;
 	}
 }

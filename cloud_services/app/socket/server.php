@@ -1,9 +1,9 @@
 <?php
 $host = 'localhost'; //host
-$port = '9000'; //port
+$port = '9999'; //port
 $null = NULL; //null var
 $key = 'uY7Gm3EPID8y3cHeJQtZyUS5xKHlVZSu';
-$url = 'http://172.16.5.99:99/smart-cafe/service/';
+$url = 'http://172.16.5.40/smart-cafe/service/';
 
 //Create TCP/IP sream socket
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
@@ -139,7 +139,7 @@ function perform_handshaking($receved_header,$client_conn, $host, $port){
 //Post data to service
 function curlPost($string = ''){
 	$key = 'uY7Gm3EPID8y3cHeJQtZyUS5xKHlVZSu';
-	$url = 'http://172.16.5.99:99/smart-cafe/service/';
+	$url = 'http://172.16.5.40/smart-cafe/service/';
 	#region encode
 	$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
 	$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
