@@ -46,6 +46,93 @@ CREATE TABLE `cs_config_user` (
 
 insert  into `cs_config_user`(`id`,`username`,`config_id`,`deleted`) values (1,'root',2,0),(2,'root',4,0);
 
+/*Table structure for table `sc_coffee_menu` */
+
+DROP TABLE IF EXISTS `sc_coffee_menu`;
+
+CREATE TABLE `sc_coffee_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) DEFAULT NULL,
+  `coffee_menu_name` varchar(50) DEFAULT NULL,
+  `coffee_menu_type_id` int(11) DEFAULT NULL,
+  `coffee_menu_price` float DEFAULT NULL,
+  `user_created` varchar(50) DEFAULT NULL,
+  `time_created` datetime DEFAULT NULL,
+  `user_modified` varchar(50) DEFAULT NULL,
+  `time_modified` datetime DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `sc_coffee_menu` */
+
+insert  into `sc_coffee_menu`(`id`,`customer_id`,`coffee_menu_name`,`coffee_menu_type_id`,`coffee_menu_price`,`user_created`,`time_created`,`user_modified`,`time_modified`,`deleted`) values (1,1,'Capuchino',1,100,NULL,NULL,NULL,NULL,0),(2,1,'Capuchino ice',1,110,NULL,NULL,NULL,NULL,0);
+
+/*Table structure for table `sc_coffee_menu_type` */
+
+DROP TABLE IF EXISTS `sc_coffee_menu_type`;
+
+CREATE TABLE `sc_coffee_menu_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) DEFAULT NULL,
+  `coffee_menu_type_name` varchar(50) DEFAULT NULL,
+  `user_created` varchar(50) DEFAULT NULL,
+  `time_created` datetime DEFAULT NULL,
+  `user_modified` varchar(50) DEFAULT NULL,
+  `time_modified` datetime DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `sc_coffee_menu_type` */
+
+insert  into `sc_coffee_menu_type`(`id`,`customer_id`,`coffee_menu_type_name`,`user_created`,`time_created`,`user_modified`,`time_modified`,`deleted`) values (1,1,'Coffee',NULL,NULL,NULL,NULL,0);
+
+/*Table structure for table `sc_coffee_table` */
+
+DROP TABLE IF EXISTS `sc_coffee_table`;
+
+CREATE TABLE `sc_coffee_table` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) DEFAULT NULL,
+  `coffee_table_name` varchar(50) DEFAULT NULL,
+  `zone_id` int(11) DEFAULT NULL,
+  `user_created` varchar(50) DEFAULT NULL,
+  `time_created` datetime DEFAULT NULL,
+  `user_modified` varchar(50) DEFAULT NULL,
+  `time_modified` datetime DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `sc_coffee_table` */
+
+insert  into `sc_coffee_table`(`id`,`customer_id`,`coffee_table_name`,`zone_id`,`user_created`,`time_created`,`user_modified`,`time_modified`,`deleted`) values (1,1,'Table 1',1,NULL,NULL,NULL,NULL,0),(2,1,'Table 2',1,NULL,NULL,NULL,NULL,0);
+
+/*Table structure for table `sc_coffee_table_order` */
+
+DROP TABLE IF EXISTS `sc_coffee_table_order`;
+
+CREATE TABLE `sc_coffee_table_order` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) DEFAULT NULL,
+  `session` bigint(20) DEFAULT NULL,
+  `coffee_table_id` int(11) DEFAULT NULL,
+  `coffee_menu_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `user_ordered` varchar(50) DEFAULT NULL,
+  `time_ordered` datetime DEFAULT NULL,
+  `user_accepted` varchar(50) DEFAULT NULL,
+  `time_accepted` datetime DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1' COMMENT '1: waiting, 2: accepted, 3: drinking',
+  `active` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `sc_coffee_table_order` */
+
+insert  into `sc_coffee_table_order`(`id`,`customer_id`,`session`,`coffee_table_id`,`coffee_menu_id`,`quantity`,`user_ordered`,`time_ordered`,`user_accepted`,`time_accepted`,`status`,`active`) values (1,1,1,1,1,1,NULL,NULL,NULL,NULL,1,1),(2,1,1,1,2,2,NULL,NULL,NULL,NULL,1,1);
+
 /*Table structure for table `sc_customer` */
 
 DROP TABLE IF EXISTS `sc_customer`;
@@ -143,6 +230,26 @@ CREATE TABLE `sc_user` (
 /*Data for the table `sc_user` */
 
 insert  into `sc_user`(`id`,`username`,`password`,`fullname`,`email`,`address`,`phone`,`country`,`avatar`,`group_id`,`time_created`,`user_created`,`time_modified`,`user_modified`,`deleted`) values (1,'root','051181fa3bf066ee4e1034013fa4940f','Administrator','admin@smartcafe.com','Ho Chi Minh City','+84123',236,NULL,1,NULL,NULL,NULL,NULL,0),(2,'boss','1afb1d07cd2b3201aae3e28a18916b3b','Boss','boss@boss.com','HCMC','+841234',236,NULL,2,NULL,NULL,NULL,NULL,0),(3,'test','8399bc113c4097b7391406efd329e01e','Tester','test@test.com','Ho Chi Minh City',NULL,236,NULL,2,NULL,NULL,NULL,NULL,0);
+
+/*Table structure for table `sc_zone` */
+
+DROP TABLE IF EXISTS `sc_zone`;
+
+CREATE TABLE `sc_zone` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) DEFAULT NULL,
+  `zone_name` varchar(50) DEFAULT NULL,
+  `user_created` varchar(50) DEFAULT NULL,
+  `time_created` datetime DEFAULT NULL,
+  `user_modified` varchar(50) DEFAULT NULL,
+  `time_modified` datetime DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `sc_zone` */
+
+insert  into `sc_zone`(`id`,`customer_id`,`zone_name`,`user_created`,`time_created`,`user_modified`,`time_modified`,`deleted`) values (1,1,'Zone1',NULL,NULL,NULL,NULL,0),(2,1,'Zone2',NULL,NULL,NULL,NULL,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
