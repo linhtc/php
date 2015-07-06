@@ -24,7 +24,3 @@ sc_logout:
 sc_lockscreen:
     path:      /lockscreen.html
     defaults:  { _controller: SmartCafeAdminBundle:Login:lockScreen }
-#admin home page for smart service
-sc_admin_smart_service:
-    prefix:      /smart-cafe/smart-service
-    resource: "@SmartServiceBundle/Resources/config/routing.yml"

@@ -1,0 +1,13 @@
+#customer page
+sc_admin_coffee_table_over_view_hidden:
+    pattern:  /
+    defaults: { _controller: SmartCafeAdminBundle:CoffeeTableOverView:view }
+sc_admin_coffee_table_over_view_hidden_get_list:
+    pattern:  /get-list
+    defaults: { _controller: SmartCafeAdminBundle:CoffeeTableOverView:getList }
+sc_admin_coffee_table_over_view_hidden_save:
+    pattern:  /save
+    defaults: { _controller: SmartCafeAdminBundle:CoffeeTableOverView:save }
+sc_admin_coffee_table_over_view_hidden_delete:
+    pattern:  /delete
+    defaults: { _controller: SmartCafeAdminBundle:CoffeeTableOverView:delete }

@@ -26,118 +26,81 @@ class CoffeeTableOverViewController extends Controller
     	$themeStyle = isset($userProfile->config->theme_style) ? $userProfile->config->theme_style : 'layout';
     	$themeColor = isset($userProfile->config->theme_color) ? $userProfile->config->theme_color : 'smart_cafe_blue';
     	#end region get permission for page
+    	
+    	#region get list coffee table
+    	$list = $this->getCoffeeTableList(); // print_r($list); exit;
+    	#end region get list coffee table
+    	
 		$data = array(
 			'permission' => $permission,
 			'isadmin' => $isadmin,
 			'themeStyle' => $themeStyle,
-			'themeColor' => $themeColor
+			'themeColor' => $themeColor,
+			'tableList' => $list
         );
         return $this->render('SmartCafeAdminBundle:CoffeeTableOverView:view.html.php', $data);
     }
-    public function getListAction(){
-		#region check permission
-		$class = get_class($this);  
-		$baseModel = new BaseModel($this->container);
-		$checkPermission = $baseModel->checkPermission($this, $class, $_SERVER['REQUEST_URI'], 'view');
-    	if($checkPermission instanceof RedirectResponse){
-    		return 'Permission denied!';
-    	}
-		#end region check permission
-		
-		#region get request
-    	$request = (isset($_POST['searchs']) ? $_POST['searchs'] : '');
-    	$page = (isset($_POST['page']) ? $_POST['page'] : '');
-		#end region get request
-		
-		#region get permission for page
-		$session = $this->getRequest()->getSession();
-		$userProfile = $session->get('profile');
-		$permission = isset($userProfile->permission->$class) ? $userProfile->permission->$class : '';
-		$isadmin = isset($userProfile->isadmin) ? $userProfile->isadmin : 0;
-		#end region get permission for page
-		
-		#region config and search data
-		$rows = 10;
-		if(isset($_POST['page'])){
-			$page = $_POST['page'];
-			$pos = ($page - 1) * $rows + 1;
-		} else{
-			$page = 1;
-			$pos = 1;
-		}
-		$search = json_decode($request);
-		$config = new \stdClass();
-		$config->page = $page;
-		$config->rowPerPage = 10;
-		$config->table = 'sc_customer';
-		$config->colAppend = '';
-		$config->tableJoin = '';
-		$config->delIf = 'deleted';
-		$resultSet = $baseModel->baseBasicSearch($search, $config);
-		$total = 0;
-		if(isset($resultSet->total)){
-			$total = $resultSet->total;
-		}
-		if(isset($resultSet->datas)){
-			$datas = $resultSet->datas;
-		}
-		$pagination = $baseModel->baseGetPageMap('listData', $page, $total, 10, '', 'getAll', '?page=');
-		#end region config and search data
-		
-		$dataRender = array(
-            'list' =>  $datas,
-            'pagination' => $pagination,
-			'total' => $total,
-			'pos' => $pos,
-			'permission' => $permission,
-			'isadmin' => $isadmin
-        );
-		
-        return $this->render('SmartCafeAdminBundle:CoffeeTableOverView:list.html.php', $dataRender);
-    }
-    public function saveAction(){
-    	#region get request
-    	$id = $_POST['id'];
-    	$searchs = $_POST['dataPost'];
-    	$search = json_decode($searchs);
-    	#end region get request
-    	
-    	#region check permission
-    	$action = empty($id) ? 'add' : 'edit';
-    	$class = get_class($this);
+    
+    public function getCoffeeTableList(){
+    	$sql = '
+			SELECT 	cf.id coffee_table_id, cf.coffee_table_name, cf.zone_id,  cfo.coffee_menu_id, cfo.quantity,
+				cfo.session, cfo.status, cm.coffee_menu_name, cm.coffee_menu_price, cfo.time_ordered
+			FROM sc_coffee_table cf LEFT JOIN sc_coffee_table_order cfo
+				ON cf.customer_id = cfo.customer_id AND cf.id = cfo.coffee_table_id
+			LEFT JOIN sc_coffee_menu cm
+				ON cfo.customer_id = cm.customer_id AND cfo.coffee_menu_id = cm.id
+			WHERE cfo.active = 1 OR cfo.active IS NULL
+    		ORDER BY cf.zone_id, cf.coffee_table_name
+		';
     	$baseModel = new BaseModel($this->container);
-    	$checkPermission = $baseModel->checkPermission($this, $class, $_SERVER['REQUEST_URI'], $action);
-    	if($checkPermission instanceof RedirectResponse){
-    		return 'Permission denied!';
-    	}
-    	#end region check permission
+    	$list = $baseModel->executeQuery($sql);
     	
-    	#region config and execute
-    	$config = new \stdClass();
-    	$config->table = 'sc_customer';
-    	$config->checkExist = array('customer_name' => 1);
-    	$config->delIf = 'deleted';
-    	$baseModel = new BaseModel($this->container);
-    	if(empty($id)){
-    		$response = $baseModel->baseBasicInsert($search, $config);
-    	} else{
-    		$config->idEdit = $id;
-    		$response = $baseModel->baseBasicUpdate($search, $config);
+    	$response = new \stdClass();
+    	if(count($list) > 0){
+    		foreach($list as $item){
+    			$coffee_table_id = $item['coffee_table_id'];
+    			$coffee_table_name = $item['coffee_table_name'];
+    			$zone_id = $item['zone_id'];
+    			$coffee_menu_id = !empty($item['coffee_menu_id']) ? $item['coffee_menu_id'] : null;
+    			$coffee_menu_name = !empty($item['coffee_menu_name']) ? $item['coffee_menu_name'] : null;
+    			$coffee_menu_price = !empty($item['coffee_menu_price']) ? $item['coffee_menu_price'] : null;
+    			$time_ordered = !empty($item['time_ordered']) ? $item['time_ordered'] : null;
+    			$status = !empty($item['status']) ? $item['status'] : null;
+    			$quantity = !empty($item['quantity']) ? $item['quantity'] : 0;
+    			$session_order = !empty($item['session']) ? $item['session'] : null;
+    			$ordering = new \stdClass();
+    			$ordering->quantity = $quantity;
+    			$ordering->coffee_menu_id = $coffee_menu_id;
+    			$ordering->coffee_menu_name = $coffee_menu_name;
+    			$ordering->coffee_menu_price = $coffee_menu_price;
+    			if(!isset($response->$coffee_table_id)){
+    				$response->$coffee_table_id = new \stdClass();
+    				$response->$coffee_table_id->coffee_table_name = $coffee_table_name;
+    				$response->$coffee_table_id->status = $status;
+    				$response->$coffee_table_id->session = $session_order;
+    				$response->$coffee_table_id->total = $quantity;
+    				if(!empty($time_ordered)){
+    					$response->$coffee_table_id->time_ordered = strtotime($time_ordered);
+    				}
+    				$response->$coffee_table_id->ordering = new \stdClass();
+    				if(!empty($coffee_menu_id)){
+    					$response->$coffee_table_id->ordering->$coffee_menu_id = $ordering;
+    				}
+    			} else{
+    				$response->$coffee_table_id->total += $quantity;
+    				if(!empty($time_ordered)){
+	    				if(strtotime($time_ordered) < $response->$coffee_table_id->time_ordered){
+	    					$response->$coffee_table_id->time_ordered = strtotime($time_ordered);
+	    					
+	    				}
+    				}
+    				if(!empty($coffee_menu_id)){
+    					$response->$coffee_table_id->ordering->$coffee_menu_id = $ordering;
+    				}
+    			}
+    		}
     	}
-    	#emd region config and execute
-    	
-    	return new Response($response);
-    }
-    public function deleteAction(){
-    	$idList = $_POST['idList'];
-    	$search = new \stdClass();
-    	$search->id = $idList;
-    	$config = new \stdClass();
-    	$config->table = 'sc_customer';
-    	$config->delIf = 'deleted';
-    	$baseModel = new BaseModel($this->container);
-    	$response = $baseModel->baseBasicDelete($search, $config);
-    	return new Response($response);
+    	return $response;
     }
 }
 

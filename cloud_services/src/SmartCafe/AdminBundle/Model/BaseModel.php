@@ -477,9 +477,19 @@ class BaseModel{
 			}
 			$pagination .= "<li class='pagination-action' style='display:none'>$action</li></ul>\n";
 		}
-		 
 		return $pagination;
-	
+	}
+	public function executeQuery($sql){
+		$cn = $this->objConnection->getConnection();
+		$list = $cn->fetchAll($sql);
+		$cn->close();
+		return $list;
+	}
+	public function executeNonQuery($sql){
+		$cn = $this->objConnection->getConnection();
+		$result = $cn->executeQuery($sql);
+		$cn->close();
+		return $result;
 	}
 	
 }
